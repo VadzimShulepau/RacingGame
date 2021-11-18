@@ -1,0 +1,487 @@
+function GameView() {
+  let bodyV = null;
+  let resize = {};
+  let wrapper = null;
+  let gameWrapper = null;
+  let startMessage = null;
+  let nameInput = null;
+  let message = null;
+  let track = null;
+  let carWrapper = null;
+  let layout = null;
+  let layoutB = null;
+  let objectMess = null;
+  let nameScore = null;
+  let numberScore = null;
+  let messageBefore = null;
+  let overMessage = null;
+  let userList = null;
+  let userListBTN = null;
+  let userListWrapper = null;
+  let userItem = null;
+  let messageSound = null;
+  let reloadMSG = null;
+  let startPageArrow = null;
+  let descriptionArrow = null;
+  let arrowIMG = null;
+  let img = new Image();
+  let soundCheck = ["./png/volume-on.png", "./png/volume-off.png"];
+  let deleteUserMessage = null;
+  let bip = null;
+  let backMusic = null;
+  let crashSound = null;
+  let raceSound = null;
+  let startSound = null;
+  let timer = null;
+  let position = 0;
+  let car = {
+    cor: 0,
+    deg: 1,
+    h: 100,
+    w: 50,
+    x: 0,
+    y: 0,
+  };
+
+  let mess = {
+    object: [
+      "./png/car2.png",
+      "./png/object.png",
+      "./png/car3.png",
+      "./png/car1.png",
+    ],
+    w: 50,
+    h: 100,
+    x: null,
+    y: null,
+  };
+
+  this.init = function (body) {
+    //инициализация
+    bodyV = body;
+    this.renderStartPage();
+    //  this.render();
+  };
+
+  this.resizeGame = function (w, h) {
+    //перерисовка отображения рабочего окна
+    // console.log(w, h)
+    resize.w = w;
+    resize.h = h;
+    wrapper.style.width = resize.w + "px";
+    wrapper.style.height = resize.h + "px";
+  };
+
+  this.render = function () {
+    //рендер игры
+
+    //  wrapper = document.createElement("div");
+    //  wrapper.classList.add("wrapper");
+    //  bodyV.append(wrapper);
+
+    gameWrapper = document.createElement("div"); // контейнер игры
+    gameWrapper.classList.add("game-wrapper");
+    wrapper.append(gameWrapper);
+
+    startMessage = document.createElement("div"); //стартовое сообщение с блоками для старта игры и ввода имени
+    startMessage.classList.add("start-message");
+    nameInput = document.createElement("input");
+    nameInput.classList.add("name-input");
+    nameInput.placeholder = "Введите ваше имя";
+    message = document.createElement("button");
+    message.classList.add("message");
+    message.textContent = "Старт";
+    messageSound = document.createElement("div");
+    messageSound.classList.add("sound-btn");
+    soundIMG = new Image();
+    soundIMG.src = soundCheck[0];
+    messageSound.append(soundIMG);
+    gameWrapper.append(startMessage);
+    messageBefore = document.createElement("span");
+    messageBefore.classList.add("error");
+    startMessage.append(messageBefore);
+    startMessage.append(nameInput);
+    startMessage.append(message);
+    startMessage.append(messageSound);
+
+    overMessage = document.createElement("div"); // блок для отображения окончания игры с возможностью перезапуска
+    overMessage.classList.add("over-message");
+    overMessage.classList.add("hide");
+    let gameOverMSG = document.createElement("span");
+    gameOverMSG.classList.add("game-over");
+    gameOverMSG.innerHTML = "Игра Окончена. <br> Желаете сыграть еще раз?";
+    overMessage.append(gameOverMSG);
+
+    reloadMSG = document.createElement("div");
+    reloadMSG.classList.add("reload-msg");
+    let reloadBTN = document.createElement("button");
+    reloadBTN.classList.add("reload-btn");
+    let reloadIMG = new Image();
+    reloadIMG.src = "./png/reload.png";
+    reloadBTN.append(reloadIMG);
+    let cancelBTN = document.createElement("button");
+    cancelBTN.classList.add("cancel-btn");
+    let cancelIMG = new Image();
+    cancelIMG.src = "./png/cancel.png";
+    let deleteBTN = document.createElement("div");
+    deleteBTN.classList.add("delete-btn");
+    let deleteIMG = new Image();
+    deleteIMG.src = "./png/delete.png";
+    deleteBTN.append(deleteIMG);
+
+    cancelBTN.append(cancelIMG);
+    reloadMSG.append(reloadBTN);
+    reloadMSG.append(cancelBTN);
+    reloadMSG.append(deleteBTN);
+    overMessage.append(reloadMSG);
+    gameWrapper.append(overMessage);
+
+    deleteUserMessage = document.createElement("span");
+    deleteUserMessage.classList.add("delete-message");
+    deleteUserMessage.textContent = "";
+    reloadMSG.after(deleteUserMessage);
+
+    layout = document.createElement("div"); //блок с отрисовкой трассы
+    layout.classList.add("layout-wrapper");
+    layout.style.backgroundImage = "url(./png/layoutDress.png)";
+    gameWrapper.append(layout);
+
+    let trackWrapper = document.createElement("div"); // блок дороги
+    trackWrapper.classList.add("track-wrapper");
+    gameWrapper.append(trackWrapper);
+
+    let trackWrapperIMG = document.createElement("div");
+    trackWrapperIMG.classList.add("track-wrapper__img");
+    layout.append(trackWrapperIMG);
+
+    let wrapperBorderLeft = document.createElement("div");
+    wrapperBorderLeft.classList.add("border-img__left");
+    wrapperBorderLeft.style.backgroundImage = "url(./png/borderLeft.png)";
+    trackWrapperIMG.append(wrapperBorderLeft);
+    wrapperBorderLeft.style.left = 0 + "px";
+    wrapperBorderLeft.style.width = 30 + "px";
+
+    let tracks = ["./png/track.png", "./png/track.png"];
+    let trackB = document.createElement("div");
+    trackB.classList.add("track-img");
+    trackB.style.backgroundImage = `url(${tracks[0]})`;
+    trackWrapperIMG.append(trackB);
+
+    let wrapperBorderRight = document.createElement("div");
+    wrapperBorderRight.classList.add("border-img__right");
+    wrapperBorderRight.style.backgroundImage = "url(./png/borderRight.png)";
+    trackWrapperIMG.append(wrapperBorderRight);
+    wrapperBorderRight.style.right = 0 + "px";
+    wrapperBorderRight.style.width = wrapperBorderLeft.offsetWidth + "px";
+
+    track = document.createElement("div"); //блок дороги для плеера и препятствий
+    track.classList.add("track");
+    track.style.left = wrapperBorderLeft.offsetWidth + "px";
+    track.style.width = trackB.offsetWidth + "px";
+    trackWrapper.append(track);
+
+    carWrapper = document.createElement("div"); // блок плеера
+    carWrapper.classList.add("car-wrapper");
+    track.append(carWrapper);
+    let carIMG = new Image();
+    carIMG.src = "./png/car4.png";
+    carWrapper.append(carIMG);
+    car.x = track.offsetWidth / 2 - carWrapper.offsetWidth / 2 + "px";
+    car.y = track.offsetHeight - carWrapper.offsetHeight + "px";
+
+    let score = document.createElement("div"); // отображение текущего имени и набраных очкав
+    score.classList.add("score");
+    nameScore = document.createElement("span");
+    nameScore.classList.add("score-name");
+    nameScore.textContent = `Имя`;
+    numberScore = document.createElement("span");
+    numberScore.classList.add("score-number");
+    numberScore.textContent = `0`;
+    score.append(nameScore);
+    score.append(numberScore);
+    gameWrapper.append(score);
+
+    layoutB = layout.cloneNode(true); // клон трассы
+    gameWrapper.append(layoutB);
+    layoutB.style.top = -track.offsetHeight + "px";
+
+    objectMess = document.createElement("div"); //блок с препятствием
+    objectMess.classList.add("new-mess");
+    track.append(objectMess);
+    objectMess.style.top = -objectMess.offsetHeight + "px";
+
+    userListWrapper = document.createElement("div"); // блок с результатами
+    userListWrapper.classList.add("user-list__wrapper");
+    gameWrapper.append(userListWrapper);
+
+    userListBTN = document.createElement("button"); // кнопка для отображения результатов
+    userListBTN.classList.add("user-list__btn");
+    userListBTN.innerHTML = "Таблица лидеров";
+    userListWrapper.append(userListBTN);
+
+    userList = document.createElement("div");
+    userList.classList.add("user-list");
+    userList.classList.add("hide-list");
+    userList.style.width = userListBTN.offsetWidth + "px";
+    userListWrapper.append(userList);
+
+    userItem = document.createElement("span");
+    userItem.classList.add("user-item");
+    userList.append(userItem);
+
+    bip = new Audio("./sound/bip.mp3");
+    gameWrapper.append(bip);
+
+    backMusic = new Audio("./sound/back_sound.mp3");
+
+    crashSound = new Audio("./sound/crash.mp3");
+    raceSound = new Audio("./sound/race.mp3");
+    startSound = new Audio("./sound/start.mp3");
+    // crashSound.preload = false;
+    // raceSound.preload = false;
+    // startSound.preload = false;
+    // gameWrapper.append(backMusic);
+    gameWrapper.append(crashSound);
+    gameWrapper.append(raceSound);
+    gameWrapper.append(startSound);
+  };
+
+  this.renderTouchArrow = function () {
+    //кнопки для управления на сенсорном экране
+    let leftTouch = document.createElement("div");
+    leftTouch.classList.add("left-touch");
+    let leftIMG = new Image();
+    leftIMG.src = "./png/left.png";
+    leftTouch.append(leftIMG);
+    gameWrapper.append(leftTouch);
+
+    let rightTouch = document.createElement("div");
+    rightTouch.classList.add("right-touch");
+    let rightIMG = new Image();
+    rightIMG.src = "./png/right.png";
+    rightTouch.append(rightIMG);
+    gameWrapper.append(rightTouch);
+  };
+
+  this.startGame = function () {
+    startMessage.classList.toggle("hide");
+  };
+
+  //Отрисовка игры
+  this.carController = function (x, y, deg) {
+    car.cor = deg;
+    if (
+      x > 0 + carWrapper.offsetWidth / 5 &&
+      x <
+        track.offsetWidth - carWrapper.offsetWidth - carWrapper.offsetWidth / 5
+    ) {
+      car.x = x;
+    }
+    if (
+      y > track.offsetTop &&
+      y < track.offsetHeight - carWrapper.offsetHeight
+    ) {
+      car.y = y;
+    }
+
+    carWrapper.style.left = car.x + "px";
+    carWrapper.style.top = car.y + "px";
+    carWrapper.style.transform = `rotate(${car.cor}deg) translate(0, ${car.cor}px)`;
+  };
+
+  this.renderRoad = function (pos) {
+    // обновление трассы
+    //отрисовка дороги
+
+    position = pos;
+
+    if (layout.offsetTop > gameWrapper.offsetHeight) {
+      layout.style.top = -gameWrapper.offsetHeight + position + "px";
+    }
+
+    if (layoutB.offsetTop > gameWrapper.offsetHeight) {
+      layoutB.style.top = -gameWrapper.offsetHeight + position + "px";
+    }
+
+    layout.style.top = position + "px";
+    layoutB.style.top = -gameWrapper.offsetHeight + position + "px";
+  };
+
+  this.overGame = function () {
+    //блок для перезагрузки
+    deleteUserMessage.textContent = "";
+    overMessage.classList.toggle("hide");
+    crashSound.pause();
+  };
+
+  this.appentIMG = function (calc) {
+    //добавление изображения препятствия
+    img.src = mess.object[calc];
+    objectMess.append(img);
+  };
+
+  this.renderMess = function (x, y) {
+    // позиционироние препятствия
+    mess.y = y;
+    mess.x = x;
+
+    objectMess.style.top = -objectMess.offsetHeight + mess.y + "px";
+    objectMess.style.left = mess.x + "px";
+  };
+
+  this.pointCount = function (score) {
+    // отрисовка набраных очков
+    numberScore.textContent = score;
+  };
+
+  this.userName = function (us) {
+    // отрисовка имени игрока
+    nameScore.textContent = us;
+  };
+
+  this.playerError = function (us) {
+    //обработка ввода имни при старте
+    let mes = null;
+    if (us) {
+      mes = "Пользователь с именем - " + us + ", уже существует";
+    } else {
+      nameInput.style.border = "2px dashed lightsalmon";
+      mes = "Поле не может быть пустым";
+    }
+    messageBefore.innerText = mes;
+  };
+
+  this.createUserList = function (i, list) {
+    // отбражение списка результатов
+    userItem = document.createElement("span");
+    userItem.classList.add("user-item");
+    userList.append(userItem);
+    if (list) {
+      userItem.textContent = `${list[i].name}: ${list[i].score}`;
+    } else {
+      userItem.innerHTML = `Данные <br> отсутствуют`;
+    }
+  };
+
+  this.clearUserList = function () {
+    // очистка списка перед обновлением
+    userList.innerHTML = "";
+  };
+
+  this.openUserList = function () {
+    userList.classList.toggle("hide-list");
+  };
+
+  this.checkSound = function (check) {
+    //перключение звука
+    let audios = document.querySelectorAll("audio");
+
+    if (check) {
+      soundIMG.src = soundCheck[0];
+      for (let audio of audios) {
+        // audio.play();
+        audio.volume = 0.7;
+        audio.autoplay = true;
+      }
+    } else {
+      soundIMG.src = soundCheck[1];
+      for (let audio of audios) {
+        // audio.pause();
+        audio.volume = 0;
+        audio.autoplay = false;
+      }
+    }
+  };
+
+  this.clearRender = function () {
+    // очищаем контейнер
+    wrapper.innerHTML = "";
+    //   gameWrapper.classList.toggle('hide');
+  };
+
+  this.renderStartPage = function () {
+    // верска стартовой страницы
+    if (!wrapper) {
+      wrapper = document.createElement("div");
+      wrapper.classList.add("wrapper");
+      bodyV.append(wrapper);
+    }
+
+    let startPage = document.createElement("div");
+    startPage.classList.add("start-page");
+    wrapper.append(startPage);
+
+    let startPageCar = document.createElement("div");
+    startPageCar.classList.add("start-page__car");
+    let carIMG = new Image();
+    carIMG.src = "./png/sport-car.png";
+    startPageCar.append(carIMG);
+    startPage.append(startPageCar);
+
+    let gameName = document.createElement("div");
+    gameName.classList.add("start-page__name");
+    let gameNameIMG = new Image();
+    gameNameIMG.src = "./svg/racing.svg";
+    gameName.append(gameNameIMG);
+    startPage.append(gameName);
+
+    let startBTN = document.createElement("button");
+    startBTN.classList.add("start-btn__start-page");
+    startBTN.textContent = "Начать Игру";
+    startPage.append(startBTN);
+
+    startPageArrow = document.createElement("div");
+    startPageArrow.classList.add("start-page__arrow");
+    arrowIMG = new Image();
+    arrowIMG.src = "./png/arrow.png";
+    descriptionArrow = document.createElement("div");
+    descriptionArrow.classList.add("start-page__arrow-description");
+    // descriptionArrow.textContent = 'управление осуществляется посредствам клавишь со стрелками';
+    startPageArrow.append(descriptionArrow);
+    startPageArrow.append(arrowIMG);
+    startPage.append(startPageArrow);
+  };
+
+  this.deleteUser = function () {
+    // сообщение при удалении данных пользователя
+    deleteUserMessage.textContent = "Пользователь удален";
+  };
+
+  this.gameViewTouch = function () {
+    //замена картинки для сенсорных дисплеев
+    descriptionArrow.textContent = "";
+    arrowIMG.src = "./png/touch.png";
+  };
+
+  this.soundClick = function (check) {
+    //звук при клике на объекты
+    bip.play();
+  };
+
+  this.crash = function (check) {
+    if (check) {
+      crashSound.play();
+    } else {
+      crashSound.pause();
+    }
+  };
+
+  this.startCarSound = function (check) {
+    if (check) {
+      startSound.play();
+    } else {
+      startSound.pause();
+    }
+  };
+
+  this.raceCarSound = function (check) {
+    console.log(check);
+    if (check) {
+      raceSound.play();
+      raceSound.loop = true;
+    } else {
+      raceSound.pause();
+      raceSound.loop = false;
+    }
+  };
+}
