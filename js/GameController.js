@@ -86,13 +86,13 @@ function GameController() {
       // console.log(nameInput.value)
     
       modelC.userName(nameInput.value);
-      // modelC.checkDataBaseUser();
+      modelC.checkDataBaseUser();
       modelC.parametres(track, gameWrapper.offsetHeight);
     }
     if (e.target.closest(".reload-wrapper")) {
       modelC.parametres(track, gameWrapper.offsetHeight);
       modelC.reloadGame();
-      modelC.userName(nameInput.value);//19.11.2021
+      // modelC.userName(nameInput.value);//19.11.2021
     }
     if (e.target.closest(".user-list__btn")) {
       modelC.openUserList();

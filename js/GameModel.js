@@ -38,13 +38,15 @@ function GameModel() {
     score: 0,
     sound: true,
   };
-  let timerInterval;
-  let count = 3;
-  let dataBaseUsers;
+  // let timerInterval;
+  // let count = 3;
+  // let dataBaseUsers = [];
+  let database = null;
   
-  this.init = function (view) {
+  this.init = function (view, data) {
     //инициализация верстки
     viewM = view;
+    database = data;
   };
 
   this.parametres = function (tr, gw) {
@@ -70,7 +72,8 @@ function GameModel() {
 
     if (us) {
       user.name = us;
-      this.checkDataBaseUser();
+      viewM.startGame();
+      // this.checkDataBaseUser();
     } else {
       viewM.playerError(us);
     }
@@ -82,7 +85,7 @@ function GameModel() {
 
     status = start;
     if (status) {
-      viewM.startGame();
+      // viewM.startGame();
       
 
       if (user.sound) {
@@ -188,6 +191,7 @@ function GameModel() {
         // console.log(user.name + "1");
         this.gameStatus(false);
         this.writeJSON();
+        // this.readJSON();
         this.createUserList();
 
         if (user.sound) {
@@ -235,7 +239,8 @@ function GameModel() {
     database.ref("users/").on(
       "value",
       (snapshot) => {
-        dataBaseUsers = Object.keys(snapshot.val());
+        // dataBaseUsers = Object.values(snapshot.val());
+       
         sortList = Object.values(snapshot.val());
         // this.createUserList(snapshot.val());
       },
@@ -250,6 +255,7 @@ function GameModel() {
     // обработка данных содание списка для отображения
 
     viewM.clearUserList();
+    this.readJSON();
     // console.log(sortList, dataBaseUsers)
     if (sortList) {
       sortList.sort(function (a, b) { //сортировка списка по убыванию
@@ -262,6 +268,7 @@ function GameModel() {
     } else {
       this.createUserListError();
     }
+
   };
 
   this.createUserListError = function () {
@@ -272,15 +279,18 @@ function GameModel() {
     database
       .ref("users/" + user.name)
       .remove()
-      .then(function () {
+      .then(() => {
         console.log("Данные удалены");
+        this.readJSON();
+        this.createUserList();
+        this.writeJSON();
         viewM.deleteUser();
+
       })
       .catch(function (error) {
         console.error("Ошибка удаления данных: ", error);
       });
-    this.readJSON();
-    this.createUserList();
+      
   };
 
   this.openUserList = function () {
@@ -292,9 +302,9 @@ function GameModel() {
 
   this.checkDataBaseUser = function (){
     let trueItem = [];
-    for (let item of dataBaseUsers){
-      if(item == user.name){
-        trueItem.push(item);
+    for (let i in sortList){
+      if(sortList[i].name == user.name){
+        trueItem.push(sortList[i].name);
       }
     }
     if(trueItem[0] == user.name){
@@ -322,12 +332,11 @@ function GameModel() {
   this.reloadGame = function () {
     // перезагрузка гонки
     //перзагрузка игры
-    start = false;
     user.score = 0;
     viewM.pointCount(user.score);
-    // console.log('reload')
     viewM.overGame();
-    viewM.startGame();
+    start = true;
+    this.gameStatus(true);
     viewM.startCarSound(true);
   };
 

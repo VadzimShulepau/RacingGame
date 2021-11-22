@@ -352,10 +352,20 @@ body {
   background-color: var(--text-color);
 }
 
+.reload-wrapper:active,
+.cancel-wrapper:active,
+.delete-wrapper:active,
+.message:active {
+  color: var(--text-color);
+  background: var(--background);
+  border: 1px solid var(--text-color);
+}
+
 .reload-wrapper:hover .reload-btn,
 .cancel-wrapper:hover .cancel-btn,
 .delete-wrapper:hover .delete-btn{
   left: calc(100% - 48px);
+  opacity: 0.5;
   /* background-color: var(--background); */
 }
 
