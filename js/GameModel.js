@@ -8,10 +8,9 @@ function GameModel() {
     arrowRigth: false,
   };
   let status = false;
-  let animation;
   let animationGame;
   let track = null;
-  let exit = false;
+  // let exit = false;
   let car = {
     speed: 9,
     cor: 0,
@@ -30,11 +29,11 @@ function GameModel() {
   let height = null;
   let position = 0;
   let max = null;
-
+  let timer = 3;
   let sortList = null;
 
   let user = {
-    name: "Имя",
+    name: null,
     score: 0,
     sound: true,
   };
@@ -68,15 +67,8 @@ function GameModel() {
   };
 
   this.userName = (us) => {
-    // передача имени и запуск игры
-
-    if (us) {
+    // передача имени 
       user.name = us;
-      viewM.startGame();
-      // this.checkDataBaseUser();
-    } else {
-      viewM.playerError(us);
-    }
     // console.log(user.name);
   };
 
@@ -87,7 +79,7 @@ function GameModel() {
     if (status) {
       // viewM.startGame();
       
-
+      // this.timerCount();
       if (user.sound) {
         viewM.startCarSound(true);
       }
@@ -214,7 +206,7 @@ function GameModel() {
     // console.log('check')
     user.sound = user.sound ? false : true;
     viewM.checkSound(user.sound);
-    window.localStorage.setItem("user", JSON.stringify(user));
+    // window.localStorage.setItem("user", JSON.stringify(user));
   };
 
   this.writeJSON = function () {
@@ -239,10 +231,7 @@ function GameModel() {
     database.ref("users/").on(
       "value",
       (snapshot) => {
-        // dataBaseUsers = Object.values(snapshot.val());
-       
-        sortList = Object.values(snapshot.val());
-        // this.createUserList(snapshot.val());
+          sortList = Object.values(snapshot.val());
       },
       (error) => {
         console.log("Error: " + error.code);
@@ -281,9 +270,9 @@ function GameModel() {
       .remove()
       .then(() => {
         console.log("Данные удалены");
-        this.readJSON();
         this.createUserList();
-        this.writeJSON();
+        // this.writeJSON();
+        // this.readJSON();
         viewM.deleteUser();
 
       })
@@ -300,22 +289,29 @@ function GameModel() {
     viewM.openUserList();
   };
 
-  this.checkDataBaseUser = function (){
+  this.checkDataBaseUser = function (name){
+    if(name){
     let trueItem = [];
     for (let i in sortList){
-      if(sortList[i].name == user.name){
+      if(sortList[i].name == name){
         trueItem.push(sortList[i].name);
       }
     }
-    if(trueItem[0] == user.name){
+    if(trueItem[0] == name){
       // console.log('error')
-      viewM.playerError(trueItem[0]);
+      viewM.playerError(name);
     }else{
       // console.log('true')
+      this.userName(name);
       status = true;
       this.gameStatus(status);
       viewM.userName(user.name);
+      viewM.startGame();
+      window.localStorage.setItem("user", JSON.stringify(user));
     }
+  }else{
+    viewM.playerError(name);
+  }
   };
 
   this.restoreSettings = function (sound) {
@@ -323,7 +319,7 @@ function GameModel() {
     if (sound) {
       let userStore = window.localStorage.getItem("user");
       if (userStore) {
-        user = JSON.parse(userStore);
+        JSONuser = JSON.parse(userStore);
         viewM.checkSound(user.sound);
       }
     }
@@ -372,6 +368,18 @@ function GameModel() {
     viewM.raceCarSound(false);
     viewM.crash(false);
     viewM.startCarSound(true);
+  };
 
+  this.timerCount = function (){
+    // таймер перед стартом игры
+    let interval;
+    let count = 1;
+    if(count < timer){
+      count--;
+      viewM.timerCount(count);
+    }else{
+
+      interval = setInterval(this.timerCount, 1000);
+    }
   };
 }

@@ -512,4 +512,9 @@ function GameView() {
       raceSound.loop = false;
     }
   };
+
+  this.timerCount = function (count){
+    // таймер перед стартом игры
+    console.log(count)
+  };
 }

@@ -344,12 +344,10 @@ body {
 .delete-wrapper:hover,
 .sound-btn:hover,
 .message:hover {
-  /* color: var(--background);
-  background: var(--text-color); */
   border: 1px solid var(--text-color);
   transform: scale(0.95);
-  color: var(--background);
-  background-color: var(--text-color);
+  color: rgba(255, 255, 255, 0.7);
+  /* background-color: rgba(255, 255, 255, 0.7); */
 }
 
 .reload-wrapper:active,
@@ -365,7 +363,7 @@ body {
 .cancel-wrapper:hover .cancel-btn,
 .delete-wrapper:hover .delete-btn{
   left: calc(100% - 48px);
-  opacity: 0.5;
+  /* opacity: 0.5; */
   /* background-color: var(--background); */
 }
 
