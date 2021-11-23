@@ -506,6 +506,21 @@ body {
   /* position: absolute; */
 }
 
+.timer{
+  display: flex;
+  position: absolute;
+  top: calc(50% - 75px);
+  left: calc(50% - 75px);
+  width: 150px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1500%;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease-out;
+  z-index: 20;
+}
+
 @keyframes car {
   0% {
     transform: translate(-50%);

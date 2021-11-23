@@ -23,6 +23,7 @@ function GameView() {
   let reloadMSG = null;
   let startPageArrow = null;
   let descriptionArrow = null;
+  let timerCount = null;
   let arrowIMG = null;
   let img = new Image();
   let soundCheck = ["./png/volume-on.png", "./png/volume-off.png"];
@@ -271,7 +272,9 @@ function GameView() {
     gameWrapper.append(raceSound);
     gameWrapper.append(startSound);
 
-
+    timerCount = document.createElement('span');
+    timerCount.classList.add('timer');
+    gameWrapper.append(timerCount);
   };
 
   this.renderTouchArrow = function () {
@@ -355,6 +358,11 @@ function GameView() {
 
     objectMess.style.top = -objectMess.offsetHeight + mess.y + "px";
     objectMess.style.left = mess.x + "px";
+  };
+
+  this.positionCar = function(x ,y){
+    carWrapper.style.top = y + 'px';
+    carWrapper.style.left = x + 'px';
   };
 
   this.pointCount = function (score) {
@@ -515,6 +523,6 @@ function GameView() {
 
   this.timerCount = function (count){
     // таймер перед стартом игры
-    console.log(count)
+    timerCount.textContent = count;
   };
 }

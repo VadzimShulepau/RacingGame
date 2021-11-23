@@ -84,8 +84,6 @@ function GameController() {
     // console.log(e.target)
     if (e.target.closest(".message")) {
       // console.log(nameInput.value)
-    
-      // modelC.userName(nameInput.value);
       modelC.checkDataBaseUser(nameInput.value);
       modelC.parametres(track, gameWrapper.offsetHeight);
     }

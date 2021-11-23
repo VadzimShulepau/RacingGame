@@ -15,6 +15,7 @@ return {
   initGame: function (body){
     // const body = document.querySelector("body");
     firebase.initializeApp(firebaseConfig);
+    
     const database = firebase.database();
     const gameView = new GameView();
     const gameModel = new GameModel();

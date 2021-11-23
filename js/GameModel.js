@@ -29,7 +29,7 @@ function GameModel() {
   let height = null;
   let position = 0;
   let max = null;
-  let timer = 3;
+  let timerInterval;
   let sortList = null;
 
   let user = {
@@ -37,8 +37,9 @@ function GameModel() {
     score: 0,
     sound: true,
   };
-  // let timerInterval;
-  // let count = 3;
+  let intervalTimer;
+  let count = 1;
+  let timer = 4;
   // let dataBaseUsers = [];
   let database = null;
   
@@ -79,7 +80,8 @@ function GameModel() {
     if (status) {
       // viewM.startGame();
       
-      // this.timerCount();
+      intervalTimer = setInterval(this.timerCount, 1000);
+
       if (user.sound) {
         viewM.startCarSound(true);
       }
@@ -90,15 +92,20 @@ function GameModel() {
         if (user.sound) {
           viewM.raceCarSound(true);
         }
-      }, 2000);
+      }, 4000);
     } else {
       viewM.raceCarSound(false);
       clearInterval(animationGame);
+      timer = 4;
       car.speed = 9;
       mess.y = -car.h;
+      car.x = track.offsetWidth / 2 - car.w / 2;
+      car.y = track.offsetHeight - car.h;
       viewM.overGame();
-      setTimeout(function () {
+      setTimeout(() => {
         viewM.renderMess(mess.x, mess.y);
+        viewM.positionCar(car.x, car.y);
+        this.parametres()
       }, 1000);
     }
   };
@@ -234,7 +241,7 @@ function GameModel() {
           sortList = Object.values(snapshot.val());
       },
       (error) => {
-        console.log("Error: " + error.code);
+        // console.log("Error: " + error.code);
         this.createUserListError();
       }
     );
@@ -290,7 +297,7 @@ function GameModel() {
   };
 
   this.checkDataBaseUser = function (name){
-    if(name){
+    if(name && name !== null){
     let trueItem = [];
     for (let i in sortList){
       if(sortList[i].name == name){
@@ -372,14 +379,12 @@ function GameModel() {
 
   this.timerCount = function (){
     // таймер перед стартом игры
-    let interval;
-    let count = 1;
-    if(count < timer){
-      count--;
-      viewM.timerCount(count);
+    if(timer > count){
+      timer -= count;
+      viewM.timerCount(timer);
     }else{
-
-      interval = setInterval(this.timerCount, 1000);
+      clearInterval(intervalTimer);
+      viewM.timerCount('');
     }
   };
 }
