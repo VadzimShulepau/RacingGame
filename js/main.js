@@ -1,6 +1,6 @@
-import { GameView } from "GameView";
-import { GameModel } from "GameModel";
-import { GameController } from "GameController";
+import { GameView } from "./GameView.js";
+import { GameModel } from "./GameModel.js";
+import { GameController } from "./GameController.js";
 
 const ConnectGame = (function(){
     const firebaseConfig = {

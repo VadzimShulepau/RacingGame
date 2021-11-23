@@ -1,6 +1,4 @@
-export { GameController }
-
-function GameController() {
+export function GameController() {
   let wrapperC = null;
   let modelC = null;
   let track = null;

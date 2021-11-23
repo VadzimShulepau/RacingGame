@@ -1,6 +1,4 @@
-export { GameView }
-
-function GameView() {
+export function GameView() {
   let bodyV = null;
   let resize = {};
   let wrapper = null;

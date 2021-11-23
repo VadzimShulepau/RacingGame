@@ -1,6 +1,4 @@
-export { GameModel }
-
-function GameModel() {
+export function GameModel() {
   let sIndex = 0.1;
   let viewM = null;
   let key = {
