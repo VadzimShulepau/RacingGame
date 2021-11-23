@@ -335,7 +335,7 @@ function GameModel() {
     user.score = 0;
     viewM.pointCount(user.score);
     viewM.overGame();
-    start = true;
+    // start = true;
     this.gameStatus(true);
     viewM.startCarSound(true);
   };
