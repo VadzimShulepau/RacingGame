@@ -59,7 +59,7 @@ function GameController() {
       // проверяем есть ли сохраненные настройки в локальном хранилище
       modelC.restoreSettings(true);
     }
-
+    modelC.parametres(track, gameWrapper.offsetHeight);
     modelC.soundCheckSettingsStart();
   };
 
@@ -84,11 +84,12 @@ function GameController() {
     // console.log(e.target)
     if (e.target.closest(".message")) {
       // console.log(nameInput.value)
+      // modelC.parametres(track, gameWrapper.offsetHeight);
+      this.initRenderPage();
       modelC.checkDataBaseUser(nameInput.value);
-      modelC.parametres(track, gameWrapper.offsetHeight);
     }
     if (e.target.closest(".reload-wrapper")) {
-      modelC.parametres(track, gameWrapper.offsetHeight);
+      this.initRenderPage();
       modelC.reloadGame();
       // modelC.userName(nameInput.value);//19.11.2021
     }

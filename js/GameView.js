@@ -33,7 +33,7 @@ function GameView() {
   let crashSound = null;
   let raceSound = null;
   let startSound = null;
-  let timer = null;
+  let timerCountSound = new Audio('./sound/beeps.mp3')
   let position = 0;
   let car = {
     cor: 0,
@@ -379,7 +379,7 @@ function GameView() {
     //обработка ввода имни при старте
     let mes = null;
     if (us) {
-      mes = "Пользователь с именем - " + us + ", уже существует";
+      mes = "Пользователь с именем " + us + ", уже существует";
     } else {
       nameInput.style.border = "2px dashed lightsalmon";
       mes = "Поле не может быть пустым";
@@ -524,5 +524,6 @@ function GameView() {
   this.timerCount = function (count){
     // таймер перед стартом игры
     timerCount.textContent = count;
+    timerCountSound.play();
   };
 }

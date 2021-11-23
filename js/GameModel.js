@@ -29,9 +29,7 @@ function GameModel() {
   let height = null;
   let position = 0;
   let max = null;
-  let timerInterval;
   let sortList = null;
-
   let user = {
     name: null,
     score: 0,
@@ -40,7 +38,6 @@ function GameModel() {
   let intervalTimer;
   let count = 1;
   let timer = 4;
-  // let dataBaseUsers = [];
   let database = null;
   
   this.init = function (view, data) {
@@ -52,7 +49,7 @@ function GameModel() {
   this.parametres = function (tr, gw) {
     //данные для перерасчета
     track = tr;
-    //   console.log(track)
+      // console.log(track)
     car.x = track.offsetWidth / 2 - car.w / 2;
     car.y = track.offsetHeight - car.h;
     height = gw;
@@ -88,24 +85,22 @@ function GameModel() {
 
       viewM.appentIMG(this.calcNumber());
       setTimeout(() => {
+        viewM.startCarSound(false);
         this.statusAnimation();
         if (user.sound) {
           viewM.raceCarSound(true);
         }
-      }, 4000);
+      }, 5000);
     } else {
       viewM.raceCarSound(false);
       clearInterval(animationGame);
-      timer = 4;
+      // timer = 5;
       car.speed = 9;
       mess.y = -car.h;
-      car.x = track.offsetWidth / 2 - car.w / 2;
-      car.y = track.offsetHeight - car.h;
       viewM.overGame();
       setTimeout(() => {
         viewM.renderMess(mess.x, mess.y);
-        viewM.positionCar(car.x, car.y);
-        this.parametres()
+        viewM.positionCar(track.offsetWidth / 2 - car.w / 2, track.offsetHeight - car.h);
       }, 1000);
     }
   };
@@ -179,7 +174,6 @@ function GameModel() {
       mess.x = this.calcPosition(max);
     }
     viewM.renderMess(mess.x, mess.y);
-    // this.colide();
   };
 
   this.colide = function () {
@@ -187,7 +181,6 @@ function GameModel() {
     if (car.y < mess.y && car.y + car.h > mess.y) {
       this.pointCount();
       if (car.x < mess.x + mess.w && car.x + car.w > mess.x) {
-        // console.log(user.name + "1");
         this.gameStatus(false);
         this.writeJSON();
         // this.readJSON();
@@ -196,7 +189,6 @@ function GameModel() {
         if (user.sound) {
           viewM.crash(true);
         }
-        // viewM.raceCarSound(false);
       }
     }
   };
@@ -234,7 +226,6 @@ function GameModel() {
 
   this.readJSON = () => {
     //вычитка данных с сервера
-    //  database.ref("users/").on("value", this.createUserList);
     database.ref("users/").on(
       "value",
       (snapshot) => {
@@ -297,14 +288,14 @@ function GameModel() {
   };
 
   this.checkDataBaseUser = function (name){
-    if(name && name !== null){
+    if(name && name !== "null"){
     let trueItem = [];
     for (let i in sortList){
       if(sortList[i].name == name){
         trueItem.push(sortList[i].name);
       }
     }
-    if(trueItem[0] == name){
+    if(trueItem[0] === name){
       // console.log('error')
       viewM.playerError(name);
     }else{
@@ -338,7 +329,6 @@ function GameModel() {
     user.score = 0;
     viewM.pointCount(user.score);
     viewM.overGame();
-    // start = true;
     this.gameStatus(true);
     viewM.startCarSound(true);
   };
@@ -379,12 +369,16 @@ function GameModel() {
 
   this.timerCount = function (){
     // таймер перед стартом игры
-    if(timer > count){
+    if(timer >= count){
       timer -= count;
       viewM.timerCount(timer);
+      if(timer < count){
+        viewM.timerCount('GO');
+      }
     }else{
       clearInterval(intervalTimer);
       viewM.timerCount('');
+      timer = 4;
     }
   };
 }
