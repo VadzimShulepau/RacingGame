@@ -1,3 +1,5 @@
+export { GameView }
+
 function GameView() {
   let bodyV = null;
   let resize = {};

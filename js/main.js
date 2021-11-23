@@ -1,3 +1,7 @@
+import { GameView } from "GameView";
+import { GameModel } from "GameModel";
+import { GameController } from "GameController";
+
 const ConnectGame = (function(){
     const firebaseConfig = {
       apiKey: "AIzaSyDTtJiobdJ_OYV0FwYxaH-vZzPtokbjLS4",
@@ -8,14 +12,12 @@ const ConnectGame = (function(){
       messagingSenderId: "549650234423",
       appId: "1:549650234423:web:11a3ea193816cea885d3b2",
     };
-    // firebase.initializeApp(firebaseConfig);
-    // const database = firebase.database();
 
 return {
+  version: 'version: 0.1',
   initGame: function (body){
-    // const body = document.querySelector("body");
+    this.main();
     firebase.initializeApp(firebaseConfig);
-    
     const database = firebase.database();
     const gameView = new GameView();
     const gameModel = new GameModel();
@@ -25,6 +27,9 @@ return {
     gameController.init(body, gameModel);
 
   },
+  main: function (){
+    console.log(`racing game ${this.version}`);
+  }
 }
 })();
-new ConnectGame.initGame(document.querySelector('body'));
+ConnectGame.initGame(document.querySelector('body'));

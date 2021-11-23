@@ -1,3 +1,5 @@
+export { GameModel }
+
 function GameModel() {
   let sIndex = 0.1;
   let viewM = null;
@@ -272,7 +274,6 @@ function GameModel() {
         // this.writeJSON();
         // this.readJSON();
         viewM.deleteUser();
-
       })
       .catch(function (error) {
         console.error("Ошибка удаления данных: ", error);
@@ -291,15 +292,13 @@ function GameModel() {
     if(name && name !== "null"){
     let trueItem = [];
     for (let i in sortList){
-      if(sortList[i].name == name){
+      if(sortList[i].name === name){
         trueItem.push(sortList[i].name);
       }
     }
     if(trueItem[0] === name){
-      // console.log('error')
       viewM.playerError(name);
     }else{
-      // console.log('true')
       this.userName(name);
       status = true;
       this.gameStatus(status);

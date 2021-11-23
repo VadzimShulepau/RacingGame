@@ -1,3 +1,5 @@
+export { GameController }
+
 function GameController() {
   let wrapperC = null;
   let modelC = null;
@@ -20,7 +22,6 @@ function GameController() {
     modelC = model;
 
     window.addEventListener("resize", this.resizeGame); // размер рабочего окна
-    // this.forceExit();
     this.resizeGame();
 
     startBTN = wrapperC.querySelector(".start-btn__start-page");
@@ -29,16 +30,11 @@ function GameController() {
       modelC.gameViewTouch();
     }
     startBTN.addEventListener("click", this.loadStartMessage);
-
-
   };
 
   this.loadStartMessage = (e) => {
     e.preventDefault();
-    // modelC.readJSON();
-
     modelC.loadStartMessage(); //загрружаем основную игру
-
     this.initRenderPage();
   };
 
@@ -73,7 +69,6 @@ function GameController() {
 
   this.initKeyUsage = function () {
     //обработка нажатия клавишь
-
     document.addEventListener("keydown", this.keydownHandler);
     document.addEventListener("keyup", this.keyupHandler);
   };
@@ -158,7 +153,6 @@ function GameController() {
         key.arrowRigth = false;
         break;
     }
-
     modelC.carController(key);
   };
 
@@ -183,7 +177,6 @@ function GameController() {
     if (e.target.closest(".right-touch")) {
       key.arrowRigth = true;
     }
-
     modelC.carController(key);
   };
 
