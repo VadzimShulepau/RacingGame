@@ -26,6 +26,7 @@ export function GameView() {
   let timerCount = null;
   let arrowIMG = null;
   let img = new Image();
+  let soundIMG = null;
   let soundCheck = ["./png/volume-on.png", "./png/volume-off.png"];
   let deleteUserMessage = null;
   let bip = null;
@@ -56,7 +57,7 @@ export function GameView() {
     x: null,
     y: null,
   };
-
+   
   this.init = function (body) {
     //инициализация
     bodyV = body;

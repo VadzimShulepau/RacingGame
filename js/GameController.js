@@ -6,14 +6,13 @@ export function GameController() {
   let nameInput = null;
   let touchDevice = null;
   let startBTN = null;
-
+  
   let key = {
     arrowUp: false,
     arrowDown: false,
     arrowLeft: false,
     arrowRigth: false,
   };
-  let nameUser = null;
 
   this.init = function (body, model) {
     wrapperC = body;

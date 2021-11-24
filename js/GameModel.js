@@ -314,7 +314,7 @@ export function GameModel() {
     if (sound) {
       let userStore = window.localStorage.getItem("user");
       if (userStore) {
-        JSONuser = JSON.parse(userStore);
+        // let JSONuser = JSON.parse(userStore);
         viewM.checkSound(user.sound);
       }
     }
