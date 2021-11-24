@@ -111,7 +111,7 @@ export function GameView() {
     overMessage.classList.add("hide");
     let gameOverMSG = document.createElement("span");
     gameOverMSG.classList.add("game-over");
-    gameOverMSG.innerHTML = "Игра Окончена.";
+    gameOverMSG.innerHTML = "Игра Окончена";
     overMessage.append(gameOverMSG);
 
     reloadMSG = document.createElement("div");
@@ -123,7 +123,7 @@ export function GameView() {
     reloadMSG.append(reloadWrapper);
 
     let reloadTxt = document.createElement('span');
-    reloadTxt.textContent = 'попробовать еще раз';
+    reloadTxt.textContent = 'повторить игру';
 
     let reloadBTN = document.createElement("div");
     reloadBTN.classList.add("reload-btn");
@@ -526,5 +526,13 @@ export function GameView() {
     // таймер перед стартом игры
     timerCount.textContent = count;
     timerCountSound.play();
+  };
+
+  this.restoreUser = function (un){
+    console.log(un)
+    let nameInput2 = document.createElement('span');
+    nameInput2.classList.add('restore-user');
+    nameInput2.textContent = un;
+    startMessage.replaceChild(nameInput2, nameInput);
   };
 }

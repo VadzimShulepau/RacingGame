@@ -33,6 +33,10 @@ export function GameController() {
     e.preventDefault();
     modelC.loadStartMessage(); //загрружаем основную игру
     this.initRenderPage();
+    if (window.localStorage) {
+      // проверяем есть ли сохраненные настройки в локальном хранилище
+      modelC.restoreSettings();
+    }
   };
 
   this.initRenderPage = function () {
@@ -48,10 +52,10 @@ export function GameController() {
     } else {
       this.initKeyUsage();
     }
-    if (window.localStorage) {
-      // проверяем есть ли сохраненные настройки в локальном хранилище
-      modelC.restoreSettings(true);
-    }
+    // if (window.localStorage) {
+    //   // проверяем есть ли сохраненные настройки в локальном хранилище
+    //   modelC.restoreSettings();
+    // }
     modelC.parametres(track, gameWrapper.offsetHeight);
     modelC.soundCheckSettingsStart();
   };
@@ -75,10 +79,12 @@ export function GameController() {
     e.stopPropagation();
     // console.log(e.target)
     if (e.target.closest(".message")) {
-      // console.log(nameInput.value)
-      // modelC.parametres(track, gameWrapper.offsetHeight);
       this.initRenderPage();
+      if(nameInput){
       modelC.checkDataBaseUser(nameInput.value);
+      }else{
+        modelC.startGameOnRestore();
+      }
     }
     if (e.target.closest(".reload-wrapper")) {
       this.initRenderPage();

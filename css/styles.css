@@ -221,10 +221,11 @@ body {
   background-color: #336ca1;
   border: solid 2px var(--text-color);
   border-radius: var(--radius);
-  padding: 15px;
+  /* padding: 15px; */
   transition: var(--transition);
   z-index: 31;
   height: 300px;
+  width: 300px;
 }
 
 .name-input {
@@ -324,18 +325,19 @@ body {
   position: relative;
   justify-content: center;
   align-items: center;
-  font-size: 80%;
+  font-size: 0.7em;
   border: 1px solid var(--background);
   color: var(--text-color);
   background: var(--background);
-  border-radius: 27px;
-  padding-right: 10px;
+  border-radius: 26px;
+  /* padding-right: 10px; */
   cursor: pointer;
   margin: 10px;
   transition: all 0.2s linear;
-  padding: 0 50px 0 50px;
+  /* padding: 0 50px 0 50px; */
   width: 95%;
   height: 50px;
+  text-align: center;
   transition: all 0.3s linear;
 }
 
@@ -519,6 +521,12 @@ body {
   color: rgba(255, 255, 255, 0.7);
   transition: color 0.3s ease-out;
   z-index: 20;
+}
+
+.restore-user{
+  background: var(--background);
+  color: var(--text-color);
+  font-size: 2em;
 }
 
 @keyframes car {

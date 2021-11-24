@@ -205,7 +205,7 @@ export function GameModel() {
     // console.log('check')
     user.sound = user.sound ? false : true;
     viewM.checkSound(user.sound);
-    // window.localStorage.setItem("user", JSON.stringify(user));
+    window.localStorage.setItem("user", JSON.stringify(user));
   };
 
   this.writeJSON = function () {
@@ -263,6 +263,7 @@ export function GameModel() {
   };
 
   this.deleteUser = function () {
+    window.localStorage.removeItem('user');
     database
       .ref("users/" + user.name)
       .remove()
@@ -309,15 +310,24 @@ export function GameModel() {
   }
   };
 
-  this.restoreSettings = function (sound) {
+  this.restoreSettings = function () {
     //востановление настроек из локальной памяти
-    if (sound) {
       let userStore = window.localStorage.getItem("user");
       if (userStore) {
-        // let JSONuser = JSON.parse(userStore);
+        user = JSON.parse(userStore);
         viewM.checkSound(user.sound);
+        if(user.name){
+          viewM.restoreUser(user.name);
+          viewM.userName(user.name);
+          // viewM.startGame(); 
+        }
       }
-    }
+  };
+
+  this.startGameOnRestore = function (){
+    status = true;
+    this.gameStatus(status);
+    viewM.startGame();
   };
 
   this.reloadGame = function () {
