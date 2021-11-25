@@ -103,7 +103,7 @@ export function GameView() {
 
     overMessage = document.createElement("div"); // блок для отображения окончания игры с возможностью перезапуска
     overMessage.classList.add("over-message");
-    // overMessage.classList.add("hide");
+    overMessage.classList.add("hide");
     let gameOverMSG = document.createElement("span");
     gameOverMSG.classList.add("game-over");
     gameOverMSG.innerHTML = "game over";
@@ -127,23 +127,6 @@ export function GameView() {
     reloadBTN.append(reloadIMG);
     reloadWrapper.append(reloadBTN);
     reloadWrapper.append(reloadTxt);
-
-    let cancelWrapper = document.createElement('div');
-    cancelWrapper.classList.add('cancel-wrapper');
-    reloadMSG.append(cancelWrapper);
-
-    let cancelTxt = document.createElement('span');
-    cancelTxt.textContent = 'quit the game';
-
-    let cancelBTN = document.createElement("div");
-    cancelBTN.classList.add("cancel-btn");
-    let cancelIMG = new Image();
-    cancelIMG.src = "./png/cancel.png";
-    cancelBTN.append(cancelIMG);
-    cancelWrapper.append(cancelBTN);
-    cancelWrapper.append(cancelTxt);
-    reloadMSG.append(cancelWrapper);
-
     let deleteWrapper = document.createElement('div');
     deleteWrapper.classList.add('delete-wrapper');
     reloadMSG.append(deleteWrapper);
@@ -159,6 +142,21 @@ export function GameView() {
     deleteWrapper.append(deleteBTN);
     deleteWrapper.append(deleteTxt);
     reloadMSG.append(deleteWrapper);
+    let cancelWrapper = document.createElement('div');
+    cancelWrapper.classList.add('cancel-wrapper');
+    reloadMSG.append(cancelWrapper);
+
+    let cancelTxt = document.createElement('span');
+    cancelTxt.textContent = 'quit';
+
+    let cancelBTN = document.createElement("div");
+    cancelBTN.classList.add("cancel-btn");
+    let cancelIMG = new Image();
+    cancelIMG.src = "./png/cancel.png";
+    cancelBTN.append(cancelIMG);
+    cancelWrapper.append(cancelBTN);
+    cancelWrapper.append(cancelTxt);
+    reloadMSG.append(cancelWrapper);
 
     gameWrapper.append(overMessage);
 

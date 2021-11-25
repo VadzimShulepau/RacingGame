@@ -5,7 +5,7 @@
   font-family: "Roboto Mono";
 }
 :root {
-  --radius: 20px;
+  --radius: 25px;
   --text-color: white;
   --background: #336ca1;
   --transition: all 0.3s linear;
@@ -325,7 +325,7 @@ body {
   position: relative;
   justify-content: flex-end;
   align-items: center;
-  font-size: 0.7em;
+  font-size: 0.8em;
   border: 1px solid var(--background);
   color: var(--text-color);
   background: var(--background);
@@ -379,7 +379,7 @@ body {
   display: inline-block;
   text-align: center;
   position: absolute;
-  /* left: calc(100% - 50px); */
+  left: 100px;
   /* opacity: 0.5; */
   /* background-color: var(--background); */
 }
@@ -388,6 +388,7 @@ body {
 .cancel-wrapper:hover span,
 .delete-wrapper:hover span{
   left: 50px;
+  transition: all 0.3s linear;
   /* opacity: 0.5; */
   /* background-color: var(--background); */
 }
