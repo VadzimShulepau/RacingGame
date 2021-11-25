@@ -87,7 +87,7 @@ export function GameView() {
     nameInput.placeholder = "enter your name";
     message = document.createElement("button");
     message.classList.add("message");
-    message.textContent = "Старт";
+    message.textContent = "start";
     messageSound = document.createElement("div");
     messageSound.classList.add("sound-btn");
     soundIMG = new Image();
@@ -242,7 +242,7 @@ export function GameView() {
 
     userListBTN = document.createElement("button"); // кнопка для отображения результатов
     userListBTN.classList.add("user-list__btn");
-    userListBTN.innerHTML = "Таблица лидеров";
+    userListBTN.innerHTML = "leaderboard";
     userListWrapper.append(userListBTN);
 
     userList = document.createElement("div");
