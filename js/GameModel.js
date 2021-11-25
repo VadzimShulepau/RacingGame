@@ -67,6 +67,7 @@ export function GameModel() {
   this.userName = (us) => {
     // передача имени 
       user.name = us;
+      viewM.userName(user.name);
     // console.log(user.name);
   };
 
@@ -299,10 +300,7 @@ export function GameModel() {
       viewM.playerError(name);
     }else{
       this.userName(name);
-      status = true;
-      this.gameStatus(status);
-      viewM.userName(user.name);
-      viewM.startGame();
+      this.startGameOnRestore();
       window.localStorage.setItem("user", JSON.stringify(user));
     }
   }else{
