@@ -30,7 +30,7 @@ export function GameView() {
   let soundCheck = ["./png/volume-on.png", "./png/volume-off.png"];
   let deleteUserMessage = null;
   let bip = null;
-  let backMusic = null;
+  // let backMusic = null;
   let crashSound = null;
   let raceSound = null;
   let startSound = null;
@@ -62,7 +62,6 @@ export function GameView() {
     //инициализация
     bodyV = body;
     this.renderStartPage();
-    //  this.render();
   };
 
   this.resizeGame = function (w, h) {
@@ -77,10 +76,6 @@ export function GameView() {
   this.render = function () {
     //рендер игры
 
-    //  wrapper = document.createElement("div");
-    //  wrapper.classList.add("wrapper");
-    //  bodyV.append(wrapper);
-
     gameWrapper = document.createElement("div"); // контейнер игры
     gameWrapper.classList.add("game-wrapper");
     wrapper.append(gameWrapper);
@@ -89,7 +84,7 @@ export function GameView() {
     startMessage.classList.add("start-message");
     nameInput = document.createElement("input");
     nameInput.classList.add("name-input");
-    nameInput.placeholder = "Введите ваше имя";
+    nameInput.placeholder = "enter your name";
     message = document.createElement("button");
     message.classList.add("message");
     message.textContent = "Старт";
@@ -123,7 +118,7 @@ export function GameView() {
     reloadMSG.append(reloadWrapper);
 
     let reloadTxt = document.createElement('span');
-    reloadTxt.textContent = 'повторить игру';
+    reloadTxt.textContent = 'play again';
 
     let reloadBTN = document.createElement("div");
     reloadBTN.classList.add("reload-btn");
@@ -138,7 +133,7 @@ export function GameView() {
     reloadMSG.append(cancelWrapper);
 
     let cancelTxt = document.createElement('span');
-    cancelTxt.textContent = 'выйти из игры';
+    cancelTxt.textContent = 'quit the game';
 
     let cancelBTN = document.createElement("div");
     cancelBTN.classList.add("cancel-btn");
@@ -154,7 +149,7 @@ export function GameView() {
     reloadMSG.append(deleteWrapper);
 
     let deleteTxt = document.createElement('span');
-    deleteTxt.textContent = 'удалить данные';
+    deleteTxt.textContent = 'delete data';
 
     let deleteBTN = document.createElement("div");
     deleteBTN.classList.add("delete-btn");
@@ -224,7 +219,7 @@ export function GameView() {
     score.classList.add("score");
     nameScore = document.createElement("span");
     nameScore.classList.add("score-name");
-    nameScore.textContent = `Имя`;
+    nameScore.textContent = `name`;
     numberScore = document.createElement("span");
     numberScore.classList.add("score-number");
     numberScore.textContent = `0`;
@@ -396,7 +391,7 @@ export function GameView() {
     if (list) {
       userItem.textContent = `${list[i].name}: ${list[i].score}`;
     } else {
-      userItem.innerHTML = `Данные <br> отсутствуют`;
+      userItem.innerHTML = `no data <br> available`;
     }
   };
 
@@ -464,7 +459,7 @@ export function GameView() {
 
     let startBTN = document.createElement("button");
     startBTN.classList.add("start-btn__start-page");
-    startBTN.textContent = "Начать Игру";
+    startBTN.textContent = "Start Game";
     startPage.append(startBTN);
 
     startPageArrow = document.createElement("div");

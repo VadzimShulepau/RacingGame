@@ -322,7 +322,7 @@ export function GameModel() {
       }
   };
 
-  this.startGameOnRestore = function (){
+  this.startGameOnRestore = function (){ // start game
     status = true;
     this.gameStatus(status);
     viewM.startGame();
