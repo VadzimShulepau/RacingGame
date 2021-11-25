@@ -39,6 +39,7 @@ export function GameModel() {
   let count = 1;
   let timer = 4;
   let database = null;
+  let curentTimeHours = new Date().getHours();
   
   this.init = function (view, data) {
     //инициализация верстки
@@ -385,5 +386,9 @@ export function GameModel() {
       viewM.timerCount('');
       timer = 4;
     }
+  };
+
+  this.weatherSettings = function (){
+
   };
 }
