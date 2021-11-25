@@ -6,6 +6,7 @@ export function GameController() {
   let nameInput = null;
   let touchDevice = null;
   let startBTN = null;
+  let geoNavigator = null;
   
   let key = {
     arrowUp: false,
@@ -27,6 +28,10 @@ export function GameController() {
       modelC.gameViewTouch();
     }
     startBTN.addEventListener("click", this.loadStartMessage);
+    geoNavigator = navigator.geolocation;
+    if(geoNavigator){
+      geoNavigator.getCurrentPosition(modelC.generatePosition);
+    }
   };
 
   this.loadStartMessage = (e) => {

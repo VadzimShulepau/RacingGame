@@ -388,6 +388,12 @@ export function GameModel() {
     }
   };
 
+  this.generatePosition = function (position){
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+   console.log(lat, lon)
+  };
+
   this.weatherSettings = function (){
 
   };
