@@ -525,7 +525,7 @@ export function GameView() {
     console.log(un)
     let nameInput2 = document.createElement('span');
     nameInput2.classList.add('restore-user');
-    nameInput2.textContent = un;
+    nameInput2.textContent = `hi ${un}`;
     startMessage.replaceChild(nameInput2, nameInput);
   };
 }
