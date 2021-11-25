@@ -30,7 +30,7 @@ export function GameView() {
   let soundCheck = ["./png/volume-on.png", "./png/volume-off.png"];
   let deleteUserMessage = null;
   let bip = null;
-  // let backMusic = null;
+  let backMusic = null;
   let crashSound = null;
   let raceSound = null;
   let startSound = null;
