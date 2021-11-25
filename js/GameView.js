@@ -103,10 +103,10 @@ export function GameView() {
 
     overMessage = document.createElement("div"); // блок для отображения окончания игры с возможностью перезапуска
     overMessage.classList.add("over-message");
-    overMessage.classList.add("hide");
+    // overMessage.classList.add("hide");
     let gameOverMSG = document.createElement("span");
     gameOverMSG.classList.add("game-over");
-    gameOverMSG.innerHTML = "Игра Окончена";
+    gameOverMSG.innerHTML = "game over";
     overMessage.append(gameOverMSG);
 
     reloadMSG = document.createElement("div");
