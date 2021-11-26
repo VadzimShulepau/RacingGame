@@ -528,7 +528,15 @@ export function GameView() {
     startMessage.replaceChild(nameInput2, nameInput);
   };
 
-  this.weatherSettings = function (){
+  // this.weatherSettings = function (){
     
+  // };
+
+  this.timesOfDay = function (flag){
+    if(flag){
+      let dimmingLayout = document.createElement('div');
+      dimmingLayout.classList.add('layout-wrapper__dimming');
+      layout.append(dimmingLayout);
+    }
   };
 }

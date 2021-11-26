@@ -39,8 +39,11 @@ export function GameModel() {
   let count = 1;
   let timer = 4;
   let database = null;
-  let curentTimeHours = new Date().getHours();
+  let curentTime = new Date();
+  const APIkey = 'c6be1bfbfa6894d1345f3402fccb7d26';
+  let exclude = 'hourly,minutely';
   
+
   this.init = function (view, data) {
     //инициализация верстки
     viewM = view;
@@ -388,13 +391,23 @@ export function GameModel() {
     }
   };
 
-  this.generatePosition = function (position){
+  this.generatePosition = (position) => {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
-   console.log(lat, lon)
+    let geoloc = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIkey}`;
+    fetch(geoloc)
+    .then(response => response.json())
+    .then(data => this.weatherSettings(data))
+    .catch(error => console.log(error));
   };
 
-  this.weatherSettings = function (){
-
+  this.weatherSettings = function (data){
+    let dateSunrise = new Date(data.sys.sunrise*1000);
+    let dateSunset = new Date(data.sys.sunset*1000);
+    if(dateSunrise < curentTime && curentTime < dateSunset){
+      viewM.timesOfDay(false);
+    }else{
+      viewM.timesOfDay(true);
+    }
   };
 }

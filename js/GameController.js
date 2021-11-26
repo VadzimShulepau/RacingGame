@@ -29,9 +29,7 @@ export function GameController() {
     }
     startBTN.addEventListener("click", this.loadStartMessage);
     geoNavigator = navigator.geolocation;
-    if(geoNavigator){
-      geoNavigator.getCurrentPosition(modelC.generatePosition);
-    }
+    
   };
 
   this.loadStartMessage = (e) => {
@@ -56,6 +54,9 @@ export function GameController() {
       this.initTouchUsage();
     } else {
       this.initKeyUsage();
+    }
+    if(geoNavigator){
+      geoNavigator.getCurrentPosition(modelC.generatePosition);
     }
     // if (window.localStorage) {
     //   // проверяем есть ли сохраненные настройки в локальном хранилище
