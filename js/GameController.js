@@ -55,7 +55,7 @@ export function GameController() {
     } else {
       this.initKeyUsage();
     }
-    if(geoNavigator){
+    if(geoNavigator){// определяем геолокацию игрока
       geoNavigator.getCurrentPosition(modelC.generatePosition);
     }
     // if (window.localStorage) {
