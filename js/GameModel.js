@@ -27,6 +27,9 @@ export function GameModel() {
     y: 0,
   };
   let height = null;
+  let width = null;
+  let from = - width;
+  let to = width;
   let position = 0;
   let max = null;
   let sortList = null;
@@ -42,7 +45,7 @@ export function GameModel() {
   let curentTime = new Date();
   const APIkey = 'c6be1bfbfa6894d1345f3402fccb7d26';
   let exclude = 'hourly,minutely';
-  
+  let weather = null;
 
   this.init = function (view, data) {
     //инициализация верстки
@@ -56,7 +59,8 @@ export function GameModel() {
       // console.log(track)
     car.x = track.offsetWidth / 2 - car.w / 2;
     car.y = track.offsetHeight - car.h;
-    height = gw;
+    height = gw.offsetHeight;
+    width = gw.offsetWidth;
     max = track.offsetWidth - mess.w;
   };
 
@@ -220,10 +224,10 @@ export function GameModel() {
       .ref("users/" + `${user.name.replace(" ", "_").toLowerCase()}`)
       .set(user)
       .then(function () {
-        console.log("Пользователь добавлен");
+        console.log("User added");
       })
       .catch(function (error) {
-        console.error("Ошибка добавления пользователя: ", error);
+        console.error("User adding error: ", error);
       });
 
     this.readJSON();
@@ -237,7 +241,7 @@ export function GameModel() {
           sortList = Object.values(snapshot.val());
       },
       (error) => {
-        // console.log("Error: " + error.code);
+        console.log("Error: " + error.code);
         this.createUserListError();
       }
     );
@@ -280,7 +284,7 @@ export function GameModel() {
         viewM.deleteUser();
       })
       .catch(function (error) {
-        console.error("Ошибка удаления данных: ", error);
+        console.error("Data deletion error: ", error);
       });
       
   };
@@ -401,6 +405,13 @@ export function GameModel() {
     .catch(error => console.log(error));
   };
 
+  
+  this.renderPrecipitation = function (from, to) {
+    let rand = Math.floor(from + Math.random() * (to + 1 - from));
+    // console.log(rand)
+    return rand;
+	};
+  
   this.weatherSettings = function (data){
     let dateSunrise = new Date(data.sys.sunrise*1000);
     let dateSunset = new Date(data.sys.sunset*1000);
@@ -408,6 +419,11 @@ export function GameModel() {
       viewM.timesOfDay(false);
     }else{
       viewM.timesOfDay(true);
+    }
+    // console.log(data)
+    weather = data.weather[0].main.toLowerCase();
+    for (let i = 0; i < 200; i++) {
+    viewM.renderPrecipitation(this.renderPrecipitation(-width, width), weather, i);
     }
   };
 }

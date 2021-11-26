@@ -57,6 +57,12 @@ export function GameView() {
     x: null,
     y: null,
   };
+
+  let weatherLook = {
+    snow: './png/snow.png',
+    rain: './png/rain.png',
+
+  }
    
   this.init = function (body) {
     //инициализация
@@ -364,19 +370,19 @@ export function GameView() {
     numberScore.textContent = score;
   };
 
-  this.userName = function (us) {
+  this.userName = function (userName) {
     // отрисовка имени игрока
-    nameScore.textContent = us;
+    nameScore.textContent = userName;
   };
 
-  this.playerError = function (us) {
+  this.playerError = function (userName) {
     //обработка ввода имни при старте
     let mes = null;
-    if (us) {
-      mes = "Пользователь с именем " + us + ", уже существует";
+    if (userName) {
+      mes = "user named " + userName + " already exists";
     } else {
       nameInput.style.border = "2px dashed lightsalmon";
-      mes = "Поле не может быть пустым";
+      mes = "the field cannot be empty";
     }
     messageBefore.innerText = mes;
   };
@@ -426,7 +432,6 @@ export function GameView() {
   this.clearRender = function () {
     // очищаем контейнер
     wrapper.innerHTML = "";
-    //   gameWrapper.classList.toggle('hide');
   };
 
   this.renderStartPage = function () {
@@ -474,7 +479,7 @@ export function GameView() {
 
   this.deleteUser = function () {
     // сообщение при удалении данных пользователя
-    deleteUserMessage.textContent = "Пользователь удален";
+    deleteUserMessage.textContent = "user deleted";
   };
 
   this.gameViewTouch = function () {
@@ -521,22 +526,43 @@ export function GameView() {
     timerCountSound.play();
   };
 
-  this.restoreUser = function (un){
+  this.restoreUser = function (userName){
     let nameInput2 = document.createElement('span');
     nameInput2.classList.add('restore-user');
-    nameInput2.textContent = `hi ${un}`;
+    nameInput2.textContent = `hi ${userName}`;
     startMessage.replaceChild(nameInput2, nameInput);
   };
-
-  // this.weatherSettings = function (){
-    
-  // };
 
   this.timesOfDay = function (flag){
     if(flag){
       let dimmingLayout = document.createElement('div');
       dimmingLayout.classList.add('layout-wrapper__dimming');
       layout.append(dimmingLayout);
+      let dimmingLayoutB = dimmingLayout.cloneNode(true);
+      layoutB.append(dimmingLayoutB);
     }
   };
+
+  this.renderPrecipitation = function (rand, weather, i){
+      let drop = document.createElement('div');
+      drop.classList.add('precipitation');
+      if(weatherLook[weather] === 'snow'){
+        drop.style.width = '30px';
+        drop.style.animation = 'precip 2s linear infinite';
+      }else {
+      drop.style.width = '7px';
+      drop.style.animation = 'precip 1.2s linear infinite';
+      }
+      let dropIMG = new Image();
+      dropIMG.src = weatherLook[weather];
+      drop.append(dropIMG);
+      document.body.append(drop);
+      drop.style.height = '30px';
+      drop.style.top = '-50px';
+      drop.style.animationDelay = `${0.03 * i}s`;
+      drop.style.left = `${rand}px`;
+      // if(drop.offsetTop > gameWrapper.offsetHeight){
+      //   drop.remove();
+      // }
+    };
 }

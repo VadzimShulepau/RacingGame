@@ -40,6 +40,9 @@ export function GameController() {
       // проверяем есть ли сохраненные настройки в локальном хранилище
       modelC.restoreSettings();
     }
+    if(geoNavigator){// определяем геолокацию игрока
+      geoNavigator.getCurrentPosition(modelC.generatePosition);
+    }
   };
 
   this.initRenderPage = function () {
@@ -55,14 +58,11 @@ export function GameController() {
     } else {
       this.initKeyUsage();
     }
-    if(geoNavigator){// определяем геолокацию игрока
-      geoNavigator.getCurrentPosition(modelC.generatePosition);
-    }
     // if (window.localStorage) {
     //   // проверяем есть ли сохраненные настройки в локальном хранилище
     //   modelC.restoreSettings();
     // }
-    modelC.parametres(track, gameWrapper.offsetHeight);
+    modelC.parametres(track, gameWrapper);
     modelC.soundCheckSettingsStart();
   };
 
