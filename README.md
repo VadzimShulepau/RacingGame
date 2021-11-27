@@ -1,2 +1,0 @@
-# RacingGame
-Racing
