@@ -32,7 +32,7 @@ body {
 
 .start-page {
   display: flex;
-  /* position: relative; */
+  position: relative;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
@@ -47,20 +47,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45%;
+  width: 40%;
   height: auto;
-  font-size: 200%;
+  font-size: 2em;
   font-weight: bold;
   text-align: center;
   border-radius: var(--radius);
   margin: 5px;
   background: var(--background);
+  /* background: rgba(0, 0, 0, 0); */
   color: var(--text-color);
   border: solid 2px var(--text-color);
   cursor: pointer;
   padding: 10px;
   transition: all 0.3s linear;
   animation: button 0.5s linear;
+  /* animation-delay: 0.5s; */
+  z-index: 10;
 }
 
 .start-btn__start-page:hover {
@@ -69,32 +72,39 @@ body {
 }
 
 .start-page__arrow {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55%;
-  height: 20%;
-  margin: 2%;
+  width: 10%;
+  height: 10%;
+  /* margin: 2%; */
+  right: 5%;
+  bottom: 1%;
   opacity: 0.3;
 }
 
 .start-page__car {
   display: flex;
+  position:absolute;
   justify-content: center;
   align-items: center;
-  width: auto;
-  height: 30%;
-  margin: 2%;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
   opacity: 0.3;
+  animation: car 1s linear;
 }
 
 .start-page__name {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
-  height: 25%;
+  width: auto;
+  height: 40%;
   margin: 2%;
+  animation: name 0.5s linear;
 }
 
 .start-page__name img {
@@ -102,8 +112,6 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  animation: 0.5s linear;
-  animation-name: name;
 }
 
 .start-page__car img {
@@ -111,8 +119,6 @@ body {
   position: relative;
   width: 90%;
   height: 100%;
-  animation: 0.5s linear;
-  animation-name: car;
 }
 
 .start-page__arrow img {
@@ -587,9 +593,17 @@ body {
 
 @keyframes car {
   0% {
+    opacity: 0;
     transform: translate(-50%);
   }
+  40%{
+    opacity: 1;
+  }
+  80%{
+    opacity: 0;
+  }
   100% {
+    opacity: 1;
     transform: translate(0);
   }
 }
@@ -625,3 +639,4 @@ body {
 		transform: translate(200px, 1000px); 
 	}
 }
+

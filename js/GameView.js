@@ -462,14 +462,21 @@ export function GameView() {
     let startPageCar = document.createElement("div");
     startPageCar.classList.add("start-page__car");
     let carIMG = new Image();
-    carIMG.src = "./png/sport-car.png";
+    carIMG.src = "./png/flag.png";
     startPageCar.append(carIMG);
+    // startPageCar.style.right = '0';
+
+
+    // let startPageCarB = startPageCar.cloneNode(true);
+    // startPageCarB.style.transform = 'scale(-1, 1)';
+    // startPageCarB.style.right = '0';
+    // startPage.append(startPageCarB);
     startPage.append(startPageCar);
 
     let gameName = document.createElement("div");
     gameName.classList.add("start-page__name");
     let gameNameIMG = new Image();
-    gameNameIMG.src = "./svg/racing1.svg";
+    gameNameIMG.src = "./svg/racing3.svg";
     gameName.append(gameNameIMG);
     startPage.append(gameName);
 

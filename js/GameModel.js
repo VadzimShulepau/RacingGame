@@ -415,7 +415,7 @@ export function GameModel() {
   this.weatherSettings = function (data){
     let dateSunrise = new Date(data.sys.sunrise*1000);
     let dateSunset = new Date(data.sys.sunset*1000);
-    if(dateSunrise > curentTime && curentTime < dateSunset){
+    if(dateSunrise < curentTime && curentTime < dateSunset){
       viewM.timesOfDay(false);
     }else{
       viewM.timesOfDay(true);
