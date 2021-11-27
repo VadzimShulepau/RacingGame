@@ -204,6 +204,14 @@ export function GameView() {
     wrapperBorderRight.style.right = 0 + "px";
     wrapperBorderRight.style.width = wrapperBorderLeft.offsetWidth + "px";
 
+    let flashlight = document.createElement('div');
+    flashlight.classList.add('flashlight');
+    let flashlightIMG = new Image();
+    flashlightIMG.src = './png/flashlight.png';
+    flashlight.append(flashlightIMG);
+    layout.append(flashlight);
+
+
     track = document.createElement("div"); //блок дороги для плеера и препятствий
     track.classList.add("track");
     track.style.left = wrapperBorderLeft.offsetWidth + "px";
@@ -544,12 +552,13 @@ export function GameView() {
   };
 
   this.renderPrecipitation = function (rand, weather, i){
+      if(weather === 'rain' || weather === 'snow'){
       let drop = document.createElement('div');
       drop.classList.add('precipitation');
-      if(weatherLook[weather] === 'snow'){
+      if(weather === 'snow'){
         drop.style.width = '30px';
         drop.style.animation = 'precip 2s linear infinite';
-      }else {
+      }else{
       drop.style.width = '7px';
       drop.style.animation = 'precip 1.2s linear infinite';
       }
@@ -561,6 +570,7 @@ export function GameView() {
       drop.style.top = '-50px';
       drop.style.animationDelay = `${0.03 * i}s`;
       drop.style.left = `${rand}px`;
+    }
       // if(drop.offsetTop > gameWrapper.offsetHeight){
       //   drop.remove();
       // }

@@ -575,6 +575,14 @@ body {
 	height:  100%;
 }
 
+.flashlight {
+  display: flex;
+  position: absolute;
+  width: 375px;
+  height: 100%;
+  z-index: 31;
+}
+
 @keyframes car {
   0% {
     transform: translate(-50%);
