@@ -34,6 +34,7 @@ export function GameView() {
   let crashSound = null;
   let raceSound = null;
   let startSound = null;
+  let flashlightIMG = null;
   let timerCountSound = new Audio('./sound/beeps.mp3')
   let position = 0;
   let car = {
@@ -206,8 +207,8 @@ export function GameView() {
 
     let flashlight = document.createElement('div');
     flashlight.classList.add('flashlight');
-    let flashlightIMG = new Image();
-    flashlightIMG.src = './png/flashlight.png';
+    flashlightIMG = new Image();
+    flashlightIMG.src = './png/flashlight-off.png';
     flashlight.append(flashlightIMG);
     layout.append(flashlight);
 
@@ -548,6 +549,7 @@ export function GameView() {
       layout.append(dimmingLayout);
       let dimmingLayoutB = dimmingLayout.cloneNode(true);
       layoutB.append(dimmingLayoutB);
+      flashlightIMG.src = './png/flashlight-on.png';
     }
   };
 
