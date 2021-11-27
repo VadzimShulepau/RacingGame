@@ -165,17 +165,17 @@ export function GameController() {
     modelC.carController(key);
   };
 
-  this.forceExit = function () {
-    var exit = true;
-    window.onbeforeunload = function () {
-      if (exit) {
-        return "Did you save your stuff?";
-      }
-    };
-    function unexit() {
-      exit = false;
-    }
-  };
+  // this.forceExit = function () {
+  //   var exit = true;
+  //   window.onbeforeunload = function () {
+  //     if (exit) {
+  //       return "Did you save your stuff?";
+  //     }
+  //   };
+  //   function unexit() {
+  //     exit = false;
+  //   }
+  // };
 
   this.startTouch = function (e) {
     e.preventDefault();

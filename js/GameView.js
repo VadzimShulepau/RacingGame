@@ -28,12 +28,15 @@ export function GameView() {
   let img = new Image();
   let soundIMG = null;
   let soundCheck = ["./png/volume-on.png", "./png/volume-off.png"];
+  let flashStatus = ['./png/flashlight-on.png', './png/flashlight-off.png'];
   let deleteUserMessage = null;
   let bip = null;
   let backMusic = null;
   let crashSound = null;
   let raceSound = null;
   let startSound = null;
+  let flashlight = null;
+  let flashlightB = null;
   let flashlightIMG = null;
   let timerCountSound = new Audio('./sound/beeps.mp3')
   let position = 0;
@@ -62,9 +65,8 @@ export function GameView() {
   let weatherLook = {
     snow: './png/snow.png',
     rain: './png/rain.png',
-
   }
-   
+
   this.init = function (body) {
     //инициализация
     bodyV = body;
@@ -205,12 +207,12 @@ export function GameView() {
     wrapperBorderRight.style.right = 0 + "px";
     wrapperBorderRight.style.width = wrapperBorderLeft.offsetWidth + "px";
 
-    let flashlight = document.createElement('div');
+    flashlight = document.createElement('div');
     flashlight.classList.add('flashlight');
-    flashlightIMG = new Image();
-    flashlightIMG.src = './png/flashlight-off.png';
-    flashlight.append(flashlightIMG);
     layout.append(flashlight);
+    // flashlightIMG = new Image();
+    // flashlightIMG.src = flashStatus[0];
+    // flashlight.append(flashlightIMG);
 
 
     track = document.createElement("div"); //блок дороги для плеера и препятствий
@@ -242,6 +244,8 @@ export function GameView() {
 
     layoutB = layout.cloneNode(true); // клон трассы
     gameWrapper.append(layoutB);
+    flashlightB  = flashlight.cloneNode(true);
+    layoutB.append(flashlightB);
     layoutB.style.top = -track.offsetHeight + "px";
 
     objectMess = document.createElement("div"); //блок с препятствием
@@ -465,7 +469,7 @@ export function GameView() {
     let gameName = document.createElement("div");
     gameName.classList.add("start-page__name");
     let gameNameIMG = new Image();
-    gameNameIMG.src = "./svg/racing.svg";
+    gameNameIMG.src = "./svg/racing1.svg";
     gameName.append(gameNameIMG);
     startPage.append(gameName);
 
@@ -538,25 +542,38 @@ export function GameView() {
   this.restoreUser = function (userName){
     let nameInput2 = document.createElement('span');
     nameInput2.classList.add('restore-user');
-    nameInput2.textContent = `hi ${userName}`;
+    nameInput2.textContent = `hi, ${userName}`;
     startMessage.replaceChild(nameInput2, nameInput);
   };
 
-  this.timesOfDay = function (flag){
-    if(flag){
+  this.timesOfDay = function (night){
+    if(night){
       let dimmingLayout = document.createElement('div');
       dimmingLayout.classList.add('layout-wrapper__dimming');
       layout.append(dimmingLayout);
       let dimmingLayoutB = dimmingLayout.cloneNode(true);
       layoutB.append(dimmingLayoutB);
-      flashlightIMG.src = './png/flashlight-on.png';
+
+      flashlightIMG = new Image();
+      flashlightIMG.src = flashStatus[0];
+      flashlight.append(flashlightIMG);
+      let flashlightB = flashlight.cloneNode(true);
+      layoutB.append(flashlightB);
+    }else{
+      flashlightIMG = new Image();
+      flashlightIMG.src = flashStatus[1];
+      flashlight.append(flashlightIMG);
+      let flashlightB = flashlight.cloneNode(true);
+      layoutB.append(flashlightB);
     }
+    
   };
 
   this.renderPrecipitation = function (rand, weather, i){
       if(weather === 'rain' || weather === 'snow'){
       let drop = document.createElement('div');
       drop.classList.add('precipitation');
+
       if(weather === 'snow'){
         drop.style.width = '30px';
         drop.style.animation = 'precip 2s linear infinite';
@@ -564,6 +581,7 @@ export function GameView() {
       drop.style.width = '7px';
       drop.style.animation = 'precip 1.2s linear infinite';
       }
+
       let dropIMG = new Image();
       dropIMG.src = weatherLook[weather];
       drop.append(dropIMG);

@@ -549,6 +549,8 @@ body {
   background: var(--background);
   color: var(--text-color);
   font-size: 1.5em;
+  margin: 0 5px;
+  text-align: center;
 }
 
 .layout-wrapper__dimming{
