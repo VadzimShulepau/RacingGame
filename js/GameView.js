@@ -583,11 +583,11 @@ export function GameView() {
       drop.classList.add('precipitation');
         switch (weather){
           case 'snow':
-            drop.style.width = '30px';
+            drop.style.width = '20px';
             drop.style.animation = 'precip 5s linear infinite';
             break;
           case 'rain':
-            drop.style.width = '7px';
+            drop.style.width = '5px';
             drop.style.animation = 'precip 1.2s linear infinite';
             break;
           // case 'clouds':
@@ -601,7 +601,7 @@ export function GameView() {
       dropIMG.src = weatherLook[weather];
       drop.append(dropIMG);
       gameWrapper.append(drop);
-      drop.style.height = '30px';
+      drop.style.height = '20px';
       drop.style.top = '-50px';
       drop.style.animationDelay = `${0.03 * i}s`;
       drop.style.left = `${rand}px`;
