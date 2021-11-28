@@ -7,7 +7,7 @@ export function GameController() {
   let touchDevice = null;
   let startBTN = null;
   let geoNavigator = null;
-  
+
   let key = {
     arrowUp: false,
     arrowDown: false,
@@ -31,8 +31,6 @@ export function GameController() {
       return message
     }); // запрос при попытке перезагркзки или закрытия страницы
 
-    window.addEventListener('beforeunload', this.unload);
-
     startBTN = wrapperC.querySelector(".start-btn__start-page");
     touchDevice = "ontouchstart" in window; // проверяем является ли устройство сенсороным
     if (touchDevice) {
@@ -40,7 +38,9 @@ export function GameController() {
     }
     startBTN.addEventListener("click", this.loadStartMessage);
     geoNavigator = navigator.geolocation;
-    
+    // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+    //   // document.body.requestFullScreen();
+    // }
   };
 
   this.loadStartMessage = (e) => {
@@ -66,22 +66,22 @@ export function GameController() {
     if (touchDevice) {
       modelC.renderTouchArrow();
       this.initTouchUsage();
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+        // console.log('mobile')
+        this.fullScreenWindow();
+    }
     } else {
       this.initKeyUsage();
     }
-    // if (window.localStorage) {
-    //   // проверяем есть ли сохраненные настройки в локальном хранилище
-    //   modelC.restoreSettings();
-    // }
     modelC.parametres(track, gameWrapper);
     modelC.soundCheckSettingsStart();
   };
 
   this.resizeGame = function () {
-    let clientWidth = document.body.clientWidth;
-    let clientHeight = document.body.clientHeight;
-    // let clientWidth = window.innerWidth;
-    // let clientHeight = window.innerHeight;
+    // let clientWidth = document.body.clientWidth;
+    // let clientHeight = document.body.clientHeight;
+    let clientWidth = window.innerWidth;
+    let clientHeight = window.innerHeight;
     modelC.resizeGame(clientWidth, clientHeight);
   };
 
@@ -199,5 +199,16 @@ export function GameController() {
     key.arrowLeft = false;
     key.arrowRigth = false;
     modelC.carController(key);
+  };
+
+  this.fullScreenWindow = function () {
+    // console.log('fullscreen')
+    if(wrapperC.requestFullScreen) {
+      wrapperC.requestFullScreen();
+    } else if(wrapperC.mozRequestFullScreen) {
+      wrapperC.mozRequestFullScreen();
+    } else if(wrapperC.webkitRequestFullScreen) {
+      wrapperC.webkitRequestFullScreen();
+    }
   };
 }

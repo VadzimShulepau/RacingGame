@@ -467,7 +467,6 @@ export function GameView() {
     startPageCar.append(carIMG);
     // startPageCar.style.right = '0';
 
-
     // let startPageCarB = startPageCar.cloneNode(true);
     // startPageCarB.style.transform = 'scale(-1, 1)';
     // startPageCarB.style.right = '0';
