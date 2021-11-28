@@ -28,7 +28,7 @@ export function GameView() {
   let img = new Image();
   let soundIMG = null;
   let soundCheck = ["./png/volume-on.png", "./png/volume-off.png"];
-  let flashStatus = ['./png/flashlight-on.png', './png/flashlight-off.png'];
+  let flashStatus = ["./png/flashlight-on.png", "./png/flashlight-off.png"];
   let deleteUserMessage = null;
   let bip = null;
   let backMusic = null;
@@ -38,7 +38,7 @@ export function GameView() {
   let flashlight = null;
   let flashlightB = null;
   let flashlightIMG = null;
-  let timerCountSound = new Audio('./sound/beeps.mp3')
+  let timerCountSound = new Audio("./sound/beeps.mp3");
   let position = 0;
   let car = {
     cor: 0,
@@ -63,10 +63,10 @@ export function GameView() {
   };
 
   let weatherLook = {
-    snow: './png/snow.png',
-    rain: './png/rain.png',
-    clouds: './png/cloud.png'
-  }
+    snow: "./png/snow.png",
+    rain: "./png/rain.png",
+    clouds: "./png/cloud.png",
+  };
 
   this.init = function (body) {
     //инициализация
@@ -123,12 +123,12 @@ export function GameView() {
     reloadMSG.classList.add("reload-msg");
     overMessage.append(reloadMSG);
 
-    let reloadWrapper = document.createElement('div');
-    reloadWrapper.classList.add('reload-wrapper');
+    let reloadWrapper = document.createElement("div");
+    reloadWrapper.classList.add("reload-wrapper");
     reloadMSG.append(reloadWrapper);
 
-    let reloadTxt = document.createElement('span');
-    reloadTxt.textContent = 'play again';
+    let reloadTxt = document.createElement("span");
+    reloadTxt.textContent = "play again";
 
     let reloadBTN = document.createElement("div");
     reloadBTN.classList.add("reload-btn");
@@ -137,12 +137,12 @@ export function GameView() {
     reloadBTN.append(reloadIMG);
     reloadWrapper.append(reloadBTN);
     reloadWrapper.append(reloadTxt);
-    let deleteWrapper = document.createElement('div');
-    deleteWrapper.classList.add('delete-wrapper');
+    let deleteWrapper = document.createElement("div");
+    deleteWrapper.classList.add("delete-wrapper");
     reloadMSG.append(deleteWrapper);
 
-    let deleteTxt = document.createElement('span');
-    deleteTxt.textContent = 'delete data';
+    let deleteTxt = document.createElement("span");
+    deleteTxt.textContent = "delete data";
 
     let deleteBTN = document.createElement("div");
     deleteBTN.classList.add("delete-btn");
@@ -152,12 +152,12 @@ export function GameView() {
     deleteWrapper.append(deleteBTN);
     deleteWrapper.append(deleteTxt);
     reloadMSG.append(deleteWrapper);
-    let cancelWrapper = document.createElement('div');
-    cancelWrapper.classList.add('cancel-wrapper');
+    let cancelWrapper = document.createElement("div");
+    cancelWrapper.classList.add("cancel-wrapper");
     reloadMSG.append(cancelWrapper);
 
-    let cancelTxt = document.createElement('span');
-    cancelTxt.textContent = 'quit';
+    let cancelTxt = document.createElement("span");
+    cancelTxt.textContent = "quit";
 
     let cancelBTN = document.createElement("div");
     cancelBTN.classList.add("cancel-btn");
@@ -208,13 +208,12 @@ export function GameView() {
     wrapperBorderRight.style.right = 0 + "px";
     wrapperBorderRight.style.width = wrapperBorderLeft.offsetWidth + "px";
 
-    flashlight = document.createElement('div');
-    flashlight.classList.add('flashlight');
+    flashlight = document.createElement("div");
+    flashlight.classList.add("flashlight");
     layout.append(flashlight);
     // flashlightIMG = new Image();
     // flashlightIMG.src = flashStatus[0];
     // flashlight.append(flashlightIMG);
-
 
     track = document.createElement("div"); //блок дороги для плеера и препятствий
     track.classList.add("track");
@@ -245,7 +244,7 @@ export function GameView() {
 
     layoutB = layout.cloneNode(true); // клон трассы
     gameWrapper.append(layoutB);
-    flashlightB  = flashlight.cloneNode(true);
+    flashlightB = flashlight.cloneNode(true);
     layoutB.append(flashlightB);
     layoutB.style.top = -track.offsetHeight + "px";
 
@@ -286,8 +285,8 @@ export function GameView() {
     gameWrapper.append(raceSound);
     gameWrapper.append(startSound);
 
-    timerCount = document.createElement('span');
-    timerCount.classList.add('timer');
+    timerCount = document.createElement("span");
+    timerCount.classList.add("timer");
     gameWrapper.append(timerCount);
   };
 
@@ -318,7 +317,7 @@ export function GameView() {
     if (
       x > 0 + carWrapper.offsetWidth / 5 &&
       x <
-        track.offsetWidth - carWrapper.offsetWidth - carWrapper.offsetWidth / 5
+      track.offsetWidth - carWrapper.offsetWidth - carWrapper.offsetWidth / 5
     ) {
       car.x = x;
     }
@@ -374,9 +373,9 @@ export function GameView() {
     objectMess.style.left = mess.x + "px";
   };
 
-  this.positionCar = function(x ,y){
-    carWrapper.style.top = y + 'px';
-    carWrapper.style.left = x + 'px';
+  this.positionCar = function (x, y) {
+    carWrapper.style.top = y + "px";
+    carWrapper.style.left = x + "px";
   };
 
   this.pointCount = function (score) {
@@ -540,23 +539,23 @@ export function GameView() {
     }
   };
 
-  this.timerCount = function (count){
+  this.timerCount = function (count) {
     // таймер перед стартом игры
     timerCount.textContent = count;
     timerCountSound.play();
   };
 
-  this.restoreUser = function (userName){
-    let nameInput2 = document.createElement('span');
-    nameInput2.classList.add('restore-user');
+  this.restoreUser = function (userName) {
+    let nameInput2 = document.createElement("span");
+    nameInput2.classList.add("restore-user");
     nameInput2.textContent = `hi, ${userName}`;
     startMessage.replaceChild(nameInput2, nameInput);
   };
 
-  this.timesOfDay = function (night){
-    if(night){
-      let dimmingLayout = document.createElement('div');
-      dimmingLayout.classList.add('layout-wrapper__dimming');
+  this.timesOfDay = function (night) {
+    if (night) {
+      let dimmingLayout = document.createElement("div");
+      dimmingLayout.classList.add("layout-wrapper__dimming");
       layout.append(dimmingLayout);
       let dimmingLayoutB = dimmingLayout.cloneNode(true);
       layoutB.append(dimmingLayoutB);
@@ -566,47 +565,46 @@ export function GameView() {
       flashlight.append(flashlightIMG);
       let flashlightB = flashlight.cloneNode(true);
       layoutB.append(flashlightB);
-    }else{
+    } else {
       flashlightIMG = new Image();
       flashlightIMG.src = flashStatus[1];
       flashlight.append(flashlightIMG);
       let flashlightB = flashlight.cloneNode(true);
       layoutB.append(flashlightB);
     }
-    
   };
 
-  this.renderPrecipitation = function (rand, weather, i){
-      if(weather === 'rain' || weather === 'snow' || weather === 'clouds'){
-      let drop = document.createElement('div');
-      drop.classList.add('precipitation');
-        switch (weather){
-          case 'snow':
-            drop.style.width = '15px';
-            drop.style.animation = 'precip 5s linear infinite';
-            break;
-          case 'rain':
-            drop.style.width = '3px';
-            drop.style.animation = 'precip 1.2s linear infinite';
-            break;
-          // case 'clouds':
-          //   drop.style.width = '100px';
-          //   drop.style.height = '100px';
-          //   drop.style.animation = 'precip 5s linear infinite';
-          // break;
-        }
+  this.renderPrecipitation = function (rand, weather, i) {
+    if (weather === "rain" || weather === "snow" || weather === "clouds") {
+      let drop = document.createElement("div");
+      drop.classList.add("precipitation");
+      switch (weather) {
+        case "snow":
+          drop.style.width = "15px";
+          drop.style.animation = "precip 5s linear infinite";
+          break;
+        case "rain":
+          drop.style.width = "3px";
+          drop.style.animation = "precip 1.2s linear infinite";
+          break;
+        // case 'clouds':
+        //   drop.style.width = '100px';
+        //   drop.style.height = '100px';
+        //   drop.style.animation = 'precip 5s linear infinite';
+        // break;
+      }
 
       let dropIMG = new Image();
       dropIMG.src = weatherLook[weather];
       drop.append(dropIMG);
       gameWrapper.append(drop);
-      drop.style.height = '15px';
-      drop.style.top = '-50px';
+      drop.style.height = "15px";
+      drop.style.top = "-50px";
       drop.style.animationDelay = `${0.03 * i}s`;
       drop.style.left = `${rand}px`;
     }
-      // if(drop.offsetTop > gameWrapper.offsetHeight){
-      //   drop.remove();
-      // }
-    };
+    // if(drop.offsetTop > gameWrapper.offsetHeight){
+    //   drop.remove();
+    // }
+  };
 }

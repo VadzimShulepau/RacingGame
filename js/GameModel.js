@@ -28,7 +28,7 @@ export function GameModel() {
   };
   let height = null;
   let width = null;
-  let from = - width;
+  let from = -width;
   let to = width;
   let position = 0;
   let max = null;
@@ -43,8 +43,8 @@ export function GameModel() {
   let timer = 4;
   let database = null;
   let curentTime = new Date();
-  const APIkey = 'c6be1bfbfa6894d1345f3402fccb7d26';
-  let exclude = 'hourly,minutely';
+  const APIkey = "c6be1bfbfa6894d1345f3402fccb7d26";
+  let exclude = "hourly,minutely";
   let weather = null;
 
   this.init = function (view, data) {
@@ -56,7 +56,7 @@ export function GameModel() {
   this.parametres = function (tr, gw) {
     //данные для перерасчета
     track = tr;
-      // console.log(track)
+    // console.log(track)
     car.x = track.offsetWidth / 2 - car.w / 2;
     car.y = track.offsetHeight - car.h;
     height = gw.offsetHeight;
@@ -73,9 +73,9 @@ export function GameModel() {
   };
 
   this.userName = (us) => {
-    // передача имени 
-      user.name = us;
-      viewM.userName(user.name);
+    // передача имени
+    user.name = us;
+    viewM.userName(user.name);
     // console.log(user.name);
   };
 
@@ -85,7 +85,7 @@ export function GameModel() {
     status = start;
     if (status) {
       // viewM.startGame();
-      
+
       intervalTimer = setInterval(this.timerCount, 1000);
 
       if (user.sound) {
@@ -109,7 +109,10 @@ export function GameModel() {
       viewM.overGame();
       setTimeout(() => {
         viewM.renderMess(mess.x, mess.y);
-        viewM.positionCar(track.offsetWidth / 2 - car.w / 2, track.offsetHeight - car.h);
+        viewM.positionCar(
+          track.offsetWidth / 2 - car.w / 2,
+          track.offsetHeight - car.h
+        );
       }, 1000);
     }
   };
@@ -238,7 +241,7 @@ export function GameModel() {
     database.ref("users/").on(
       "value",
       (snapshot) => {
-          sortList = Object.values(snapshot.val());
+        sortList = Object.values(snapshot.val());
       },
       (error) => {
         console.log("Error: " + error.code);
@@ -254,17 +257,17 @@ export function GameModel() {
     this.readJSON();
     // console.log(sortList, dataBaseUsers)
     if (sortList) {
-      sortList.sort(function (a, b) { //сортировка списка по убыванию
+      sortList.sort(function (a, b) {
+        //сортировка списка по убыванию
         return b.score - a.score;
       });
       // let numberPlayers = sortList.length > 15 ? 15: sortList.length; // отображение максимум 15 из списка
       for (let i = 0; i < 15 && i < sortList.length; i++) {
-          viewM.createUserList(i, sortList);  
+        viewM.createUserList(i, sortList);
       }
     } else {
       this.createUserListError();
     }
-
   };
 
   this.createUserListError = function () {
@@ -272,7 +275,7 @@ export function GameModel() {
   };
 
   this.deleteUser = function () {
-    window.localStorage.removeItem('user');
+    window.localStorage.removeItem("user");
     database
       .ref("users/" + user.name)
       .remove()
@@ -286,7 +289,6 @@ export function GameModel() {
       .catch(function (error) {
         console.error("Data deletion error: ", error);
       });
-      
   };
 
   this.openUserList = function () {
@@ -296,41 +298,42 @@ export function GameModel() {
     viewM.openUserList();
   };
 
-  this.checkDataBaseUser = function (name){
-    if(name && name !== "null"){
-    let trueItem = [];
-    for (let i in sortList){
-      if(sortList[i].name === name){
-        trueItem.push(sortList[i].name);
+  this.checkDataBaseUser = function (name) {
+    if (name && name !== "null") {
+      let trueItem = [];
+      for (let i in sortList) {
+        if (sortList[i].name === name) {
+          trueItem.push(sortList[i].name);
+        }
       }
-    }
-    if(trueItem[0] === name){
+      if (trueItem[0] === name) {
+        viewM.playerError(name);
+      } else {
+        this.userName(name);
+        this.startGameOnRestore();
+        window.localStorage.setItem("user", JSON.stringify(user));
+      }
+    } else {
       viewM.playerError(name);
-    }else{
-      this.userName(name);
-      this.startGameOnRestore();
-      window.localStorage.setItem("user", JSON.stringify(user));
     }
-  }else{
-    viewM.playerError(name);
-  }
   };
 
   this.restoreSettings = function () {
     //востановление настроек из локальной памяти
-      let userStore = window.localStorage.getItem("user");
-      if (userStore) {
-        user = JSON.parse(userStore);
-        viewM.checkSound(user.sound);
-        if(user.name){
-          viewM.restoreUser(user.name);
-          viewM.userName(user.name);
-          // viewM.startGame(); 
-        }
+    let userStore = window.localStorage.getItem("user");
+    if (userStore) {
+      user = JSON.parse(userStore);
+      viewM.checkSound(user.sound);
+      if (user.name) {
+        viewM.restoreUser(user.name);
+        viewM.userName(user.name);
+        // viewM.startGame();
       }
+    }
   };
 
-  this.startGameOnRestore = function (){ // start game
+  this.startGameOnRestore = function () {
+    // start game
     status = true;
     this.gameStatus(status);
     viewM.startGame();
@@ -380,17 +383,17 @@ export function GameModel() {
     viewM.startCarSound(true);
   };
 
-  this.timerCount = function (){
+  this.timerCount = function () {
     // таймер перед стартом игры
-    if(timer >= count){
+    if (timer >= count) {
       timer -= count;
       viewM.timerCount(timer);
-      if(timer < count){
-        viewM.timerCount('GO');
+      if (timer < count) {
+        viewM.timerCount("GO");
       }
-    }else{
+    } else {
       clearInterval(intervalTimer);
-      viewM.timerCount('');
+      viewM.timerCount("");
       timer = 4;
     }
   };
@@ -400,29 +403,30 @@ export function GameModel() {
     let lon = position.coords.longitude;
     let geoloc = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIkey}`;
     fetch(geoloc)
-    .then(response => response.json())
-    .then(data => this.weatherSettings(data))
-    .catch(error => console.log(error));
+      .then((response) => response.json())
+      .then((data) => this.weatherSettings(data))
+      .catch((error) => console.log(error));
   };
 
   this.renderPrecipitation = function (from, to) {
     let rand = Math.floor(from + Math.random() * (to + 1 - from));
     // console.log(rand)
     return rand;
-	};
-  
-  this.weatherSettings = function (data){
-    let dateSunrise = new Date(data.sys.sunrise*1000);
-    let dateSunset = new Date(data.sys.sunset*1000);
-    if(dateSunrise < curentTime && curentTime < dateSunset){
+  };
+
+  this.weatherSettings = function (data) {
+    let dateSunrise = new Date(data.sys.sunrise * 1000);
+    let dateSunset = new Date(data.sys.sunset * 1000);
+    if (dateSunrise < curentTime && curentTime < dateSunset) {
       viewM.timesOfDay(false);
-    }else{
+    } else {
       viewM.timesOfDay(true);
     }
     // console.log(data)
     weather = data.weather[0].main.toLowerCase();
     for (let i = 0; i < 200; i++) {
-    viewM.renderPrecipitation(this.renderPrecipitation(-width, width), weather, i);
+      viewM.renderPrecipitation(
+        this.renderPrecipitation(-width, width), weather, i);
     }
   };
 }

@@ -22,13 +22,13 @@ export function GameController() {
     window.addEventListener("resize", this.resizeGame); // размер рабочего окна
     this.resizeGame();
 
-    window.addEventListener('beforeunload', function (e) {
+    window.addEventListener("beforeunload", function (e) {
       e.preventDefault();
-      let message = 'your data will be lost';
-      if(e){
+      let message = "your data will be lost";
+      if (e) {
         e.returnValue = message;
       }
-      return message
+      return message;
     }); // запрос при попытке перезагркзки или закрытия страницы
 
     startBTN = wrapperC.querySelector(".start-btn__start-page");
@@ -51,7 +51,8 @@ export function GameController() {
       // проверяем есть ли сохраненные настройки в локальном хранилище
       modelC.restoreSettings();
     }
-    if(geoNavigator){// определяем геолокацию игрока
+    if (geoNavigator) {
+      // определяем геолокацию игрока
       geoNavigator.getCurrentPosition(modelC.generatePosition);
     }
   };
@@ -66,11 +67,12 @@ export function GameController() {
     if (touchDevice) {
       modelC.renderTouchArrow();
       this.initTouchUsage();
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
         // console.log('mobile')
         // включение полноэкранного режима для мобильных устройств
         this.fullScreenWindow();
-    }
+      }
     } else {
       this.initKeyUsage();
     }
@@ -98,9 +100,9 @@ export function GameController() {
     // console.log(e.target)
     if (e.target.closest(".message")) {
       this.initRenderPage();
-      if(nameInput){
-      modelC.checkDataBaseUser(nameInput.value);
-      }else{
+      if (nameInput) {
+        modelC.checkDataBaseUser(nameInput.value);
+      } else {
         modelC.startGameOnRestore();
       }
     }
@@ -181,7 +183,7 @@ export function GameController() {
   //   e.preventDefault();
   //   e.returnValue = 'your data will be lost';
   // };
-  
+
   this.startTouch = function (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -202,13 +204,14 @@ export function GameController() {
     modelC.carController(key);
   };
 
-  this.fullScreenWindow = function () {// включение полноэкранного режима для мобильных устройств
+  this.fullScreenWindow = function () {
+    // включение полноэкранного режима для мобильных устройств
     // console.log('fullscreen')
-    if(wrapperC.requestFullScreen) {
+    if (wrapperC.requestFullScreen) {
       wrapperC.requestFullScreen();
-    } else if(wrapperC.mozRequestFullScreen) {
+    } else if (wrapperC.mozRequestFullScreen) {
       wrapperC.mozRequestFullScreen();
-    } else if(wrapperC.webkitRequestFullScreen) {
+    } else if (wrapperC.webkitRequestFullScreen) {
       wrapperC.webkitRequestFullScreen();
     }
   };
