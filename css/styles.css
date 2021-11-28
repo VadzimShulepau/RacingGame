@@ -606,6 +606,7 @@ body {
   opacity: 0.5;
 	border-radius: 20px;
 	z-index: 45;
+  transition: all 0.5s linear;
 }
 
 .lazzy-load__round{
@@ -616,7 +617,7 @@ body {
   border-radius: 40px;
   border: 10px dashed white;
   z-index: 46;
-  animation: 3s linear infinite rotate;
+  animation: 3s ease-in-out infinite rotate;
 }
 
 @keyframes car {
