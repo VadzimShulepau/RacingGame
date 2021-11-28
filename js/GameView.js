@@ -65,6 +65,7 @@ export function GameView() {
   let weatherLook = {
     snow: './png/snow.png',
     rain: './png/rain.png',
+    clouds: './png/cloud.png'
   }
 
   this.init = function (body) {
@@ -577,22 +578,29 @@ export function GameView() {
   };
 
   this.renderPrecipitation = function (rand, weather, i){
-      if(weather === 'rain' || weather === 'snow'){
+      if(weather === 'rain' || weather === 'snow' || weather === 'clouds'){
       let drop = document.createElement('div');
       drop.classList.add('precipitation');
-
-      if(weather === 'snow'){
-        drop.style.width = '30px';
-        drop.style.animation = 'precip 2s linear infinite';
-      }else{
-      drop.style.width = '7px';
-      drop.style.animation = 'precip 1.2s linear infinite';
-      }
+        switch (weather){
+          case 'snow':
+            drop.style.width = '30px';
+            drop.style.animation = 'precip 5s linear infinite';
+            break;
+          case 'rain':
+            drop.style.width = '7px';
+            drop.style.animation = 'precip 1.2s linear infinite';
+            break;
+          // case 'clouds':
+          //   drop.style.width = '100px';
+          //   drop.style.height = '100px';
+          //   drop.style.animation = 'precip 5s linear infinite';
+          // break;
+        }
 
       let dropIMG = new Image();
       dropIMG.src = weatherLook[weather];
       drop.append(dropIMG);
-      document.body.append(drop);
+      gameWrapper.append(drop);
       drop.style.height = '30px';
       drop.style.top = '-50px';
       drop.style.animationDelay = `${0.03 * i}s`;
