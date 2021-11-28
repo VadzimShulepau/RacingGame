@@ -22,6 +22,17 @@ export function GameController() {
     window.addEventListener("resize", this.resizeGame); // размер рабочего окна
     this.resizeGame();
 
+    window.addEventListener('beforeunload', function (e) {
+      e.preventDefault();
+      let message = 'your data will be lost';
+      if(e){
+        e.returnValue = message;
+      }
+      return message
+    }); // запрос при попытке перезагркзки или закрытия страницы
+
+    window.addEventListener('beforeunload', this.unload);
+
     startBTN = wrapperC.querySelector(".start-btn__start-page");
     touchDevice = "ontouchstart" in window; // проверяем является ли устройство сенсороным
     if (touchDevice) {
@@ -165,18 +176,11 @@ export function GameController() {
     modelC.carController(key);
   };
 
-  // this.forceExit = function () {
-  //   var exit = true;
-  //   window.onbeforeunload = function () {
-  //     if (exit) {
-  //       return "Did you save your stuff?";
-  //     }
-  //   };
-  //   function unexit() {
-  //     exit = false;
-  //   }
+  // this.unload = (e) => {
+  //   e.preventDefault();
+  //   e.returnValue = 'your data will be lost';
   // };
-
+  
   this.startTouch = function (e) {
     e.preventDefault();
     e.stopPropagation();

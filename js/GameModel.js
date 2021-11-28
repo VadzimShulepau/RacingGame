@@ -405,7 +405,6 @@ export function GameModel() {
     .catch(error => console.log(error));
   };
 
-  
   this.renderPrecipitation = function (from, to) {
     let rand = Math.floor(from + Math.random() * (to + 1 - from));
     // console.log(rand)
