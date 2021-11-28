@@ -39,6 +39,7 @@ export function GameView() {
   let flashlightB = null;
   let flashlightIMG = null;
   let timerCountSound = new Audio("./sound/beeps.mp3");
+  let lazzyLoad = null;
   let position = 0;
   let car = {
     cor: 0,
@@ -288,6 +289,13 @@ export function GameView() {
     timerCount = document.createElement("span");
     timerCount.classList.add("timer");
     gameWrapper.append(timerCount);
+
+    lazzyLoad = document.createElement('div');
+    lazzyLoad.classList.add('lazzy-load');
+    wrapper.append(lazzyLoad);
+    let lazzyRound = document.createElement('div');
+    lazzyRound.classList.add('lazzy-load__round');
+    lazzyLoad.append(lazzyRound);
   };
 
   this.renderTouchArrow = function () {
@@ -607,4 +615,11 @@ export function GameView() {
     //   drop.remove();
     // }
   };
+
+  this.lazzyStatus = function (status){
+    if(!status){
+      lazzyLoad.remove();
+    }
+  };
+
 }

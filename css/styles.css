@@ -591,6 +591,34 @@ body {
   z-index: 31;
 }
 
+.lazzy-load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  filter: blur(1px);
+	background: var(--background);
+  opacity: 0.5;
+	border-radius: 20px;
+	z-index: 45;
+}
+
+.lazzy-load__round{
+	position: absolute;
+  display: flex;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  border: 10px dashed white;
+  z-index: 46;
+  animation: 3s linear infinite rotate;
+}
+
 @keyframes car {
   0% {
     opacity: 0;
@@ -637,5 +665,14 @@ body {
 @keyframes precip {
   100% {
     transform: translate(200px, 1000px);
+  }
+}
+
+@keyframes rotate {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
   }
 }
