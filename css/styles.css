@@ -596,10 +596,10 @@ body {
     opacity: 0;
     transform: translate(-50%);
   }
-  40%{
+  35%{
     opacity: 1;
   }
-  80%{
+  70%{
     opacity: 0;
   }
   100% {
