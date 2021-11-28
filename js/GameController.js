@@ -68,6 +68,7 @@ export function GameController() {
       this.initTouchUsage();
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
         // console.log('mobile')
+        // включение полноэкранного режима для мобильных устройств
         this.fullScreenWindow();
     }
     } else {
@@ -201,7 +202,7 @@ export function GameController() {
     modelC.carController(key);
   };
 
-  this.fullScreenWindow = function () {
+  this.fullScreenWindow = function () {// включение полноэкранного режима для мобильных устройств
     // console.log('fullscreen')
     if(wrapperC.requestFullScreen) {
       wrapperC.requestFullScreen();
