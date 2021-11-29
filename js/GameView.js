@@ -638,8 +638,7 @@ export function GameView() {
     wrapper.append(lazzyError);
 
     if(!status){
-      lazzyError.innerHTML = `<span>loading error d
-      these...</span> 
+      lazzyError.innerHTML = `<span>data loading error...</span> 
       <div class = "lazzy-load__btn">OK</div>`;
     }
     if(!net){
