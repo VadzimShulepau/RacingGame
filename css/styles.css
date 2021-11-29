@@ -615,7 +615,6 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 40px;
-  border: 10px dashed white;
   z-index: 46;
   animation: 3s ease-in-out infinite rotate;
 }

@@ -40,6 +40,7 @@ export function GameView() {
   let flashlightIMG = null;
   let timerCountSound = new Audio("./sound/beeps.mp3");
   let lazzyLoad = null;
+  let lazzyRound = null;
   let position = 0;
   let car = {
     cor: 0,
@@ -293,9 +294,12 @@ export function GameView() {
     lazzyLoad = document.createElement('div');
     lazzyLoad.classList.add('lazzy-load');
     wrapper.append(lazzyLoad);
-    let lazzyRound = document.createElement('div');
+    lazzyRound = document.createElement('div');
+    let lazzyLoadIMG = new Image();
+    lazzyLoadIMG.src = './png/tyre.png';
+    lazzyRound.append(lazzyLoadIMG); 
     lazzyRound.classList.add('lazzy-load__round');
-    lazzyLoad.append(lazzyRound);
+    wrapper.append(lazzyRound);
   };
 
   this.renderTouchArrow = function () {
@@ -520,7 +524,7 @@ export function GameView() {
     bip.play();
   };
 
-  this.crash = function (check) {
+  this.crash = function (check) { //звук столкновения
     if (check) {
       crashSound.play();
     } else {
@@ -536,7 +540,7 @@ export function GameView() {
     }
   };
 
-  this.raceCarSound = function (check) {
+  this.raceCarSound = function (check) { //звук машины
     // console.log(check);
     if (check) {
       raceSound.play();
@@ -553,14 +557,14 @@ export function GameView() {
     timerCountSound.play();
   };
 
-  this.restoreUser = function (userName) {
+  this.restoreUser = function (userName) { //вывод имени из локального хранилища
     let nameInput2 = document.createElement("span");
     nameInput2.classList.add("restore-user");
     nameInput2.textContent = `hi, ${userName}`;
     startMessage.replaceChild(nameInput2, nameInput);
   };
 
-  this.timesOfDay = function (night) {
+  this.timesOfDay = function (night) { //перключение времени суток
     if (night) {
       let dimmingLayout = document.createElement("div");
       dimmingLayout.classList.add("layout-wrapper__dimming");
@@ -582,7 +586,7 @@ export function GameView() {
     }
   };
 
-  this.renderPrecipitation = function (rand, weather, i) {
+  this.renderPrecipitation = function (rand, weather, i) { //погодные условия
     if (weather === "rain" || weather === "snow" || weather === "clouds") {
       let drop = document.createElement("div");
       drop.classList.add("precipitation");
@@ -616,9 +620,10 @@ export function GameView() {
     // }
   };
 
-  this.lazzyStatus = function (status){
+  this.lazzyStatus = function (status){ // отключение анимации загрузки
     if(!status){
       lazzyLoad.remove();
+      lazzyRound.remove();
     }
   };
 

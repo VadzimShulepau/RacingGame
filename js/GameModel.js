@@ -274,7 +274,7 @@ export function GameModel() {
     viewM.createUserList(null, null);
   };
 
-  this.deleteUser = function () {
+  this.deleteUser = function () { 
     window.localStorage.removeItem("user");
     database
       .ref("users/" + user.name)
@@ -298,7 +298,7 @@ export function GameModel() {
     viewM.openUserList();
   };
 
-  this.checkDataBaseUser = function (name) {
+  this.checkDataBaseUser = function (name) { //валидация имени
     if (name && name !== "null") {
       let trueItem = [];
       for (let i in sortList) {
@@ -350,7 +350,7 @@ export function GameModel() {
   };
 
   this.closeGame = function () {
-    //перход на первую страницу
+    //перход на стартовую страницу
     //   console.log('close')
     viewM.clearRender();
     viewM.renderStartPage();
@@ -364,20 +364,21 @@ export function GameModel() {
     this.readJSON();
   };
 
-  this.gameViewTouch = function () {
+  this.gameViewTouch = function () { //отображение сенсорных кнопок
     viewM.gameViewTouch();
   };
 
-  this.soundClick = function () {
+  this.soundClick = function () { //переключение звука
     if (user.sound) {
       viewM.soundClick();
     }
   };
+
   this.renderTouchArrow = function () {
     viewM.renderTouchArrow();
   };
 
-  this.soundCheckSettingsStart = function () {
+  this.soundCheckSettingsStart = function () { //стартовая настройка звука
     viewM.raceCarSound(false);
     viewM.crash(false);
     viewM.startCarSound(true);
@@ -398,7 +399,7 @@ export function GameModel() {
     }
   };
 
-  this.generatePosition = (position) => {
+  this.generatePosition = (position) => { //подключение API для получения погоды
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     let geoloc = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIkey}`;
@@ -408,14 +409,16 @@ export function GameModel() {
       .catch((error) => console.log(error));
   };
 
-  this.renderPrecipitation = function (from, to) {
+  this.renderPrecipitation = function (from, to) { //рендер случайного числа для осадков
     let rand = Math.floor(from + Math.random() * (to + 1 - from));
     // console.log(rand)
     return rand;
   };
 
   this.weatherSettings = function (data) {
-    viewM.lazzyStatus(false);
+    //рендер погодных условий 
+    //перключение времени суток
+    viewM.lazzyStatus(false); //отключение загрузки
     let dateSunrise = new Date(data.sys.sunrise * 1000);
     let dateSunset = new Date(data.sys.sunset * 1000);
     if (dateSunrise < curentTime && curentTime < dateSunset) {
