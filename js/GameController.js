@@ -95,7 +95,7 @@ export function GameController() {
     document.addEventListener("keyup", this.keyupHandler);
   };
 
-  this.clickButton = (e) => {
+  this.clickButton = (e) => { //обработка кликов на кнопки
     e.preventDefault();
     e.stopPropagation();
     // console.log(e.target)
