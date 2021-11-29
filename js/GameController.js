@@ -179,11 +179,6 @@ export function GameController() {
     modelC.carController(key);
   };
 
-  // this.unload = (e) => {
-  //   e.preventDefault();
-  //   e.returnValue = 'your data will be lost';
-  // };
-
   this.startTouch = function (e) {
     e.preventDefault();
     e.stopPropagation();
