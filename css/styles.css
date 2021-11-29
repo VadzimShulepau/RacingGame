@@ -11,6 +11,7 @@
   --transition: all 0.3s linear;
   --fontSize: 20px;
   --padd: 10px;
+  --error-text: lightcoral;
 }
 html,
 body {
@@ -406,7 +407,7 @@ body {
   height: max-content;
   width: max-content;
   padding: var(--padd);
-  color: lightcoral;
+  color: var(--error-text);
   font-size: 15px;
 }
 
@@ -619,16 +620,34 @@ body {
   animation: 3s ease-in-out infinite rotate;
 }
 
+.lazzy-error__text{
+display: inline-flex;
+justify-content: center;
+font-size: var(--fontSize);
+color: var(--error-text);
+}
+
+.lazzy-error__btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: var(--text-color);
+  border-radius: var(--radius);
+  width: 60px;
+  height: 50px;
+}
+
 @keyframes car {
   0% {
     opacity: 0;
     transform: translate(-50%);
   }
   35% {
-    opacity: 1;
+    opacity: 0.8;
   }
   70% {
-    opacity: 0;
+    opacity: 0.2;
   }
   100% {
     opacity: 1;

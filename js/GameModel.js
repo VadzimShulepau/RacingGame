@@ -406,7 +406,9 @@ export function GameModel() {
     fetch(geoloc)
       .then((response) => response.json())
       .then((data) => this.weatherSettings(data))
-      .catch((error) => console.log(error));
+      .catch((error) => {console.log(error);
+        viewM.weatherSettingsError();
+      });
   };
 
   this.renderPrecipitation = function (from, to) { //рендер случайного числа для осадков
@@ -418,7 +420,7 @@ export function GameModel() {
   this.weatherSettings = function (data) {
     //рендер погодных условий 
     //перключение времени суток
-    viewM.lazzyStatus(false); //отключение загрузки
+    this.lazzyStatus(); //отключение загрузки
     let dateSunrise = new Date(data.sys.sunrise * 1000);
     let dateSunset = new Date(data.sys.sunset * 1000);
     if (dateSunrise < curentTime && curentTime < dateSunset) {
@@ -432,5 +434,9 @@ export function GameModel() {
       viewM.renderPrecipitation(
         this.renderPrecipitation(-width, width), weather, i);
     }
+  };
+
+  this.lazzyStatus = function () {
+    viewM.lazzyStatus(false);
   };
 }

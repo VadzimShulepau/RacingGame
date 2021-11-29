@@ -627,4 +627,16 @@ export function GameView() {
     }
   };
 
+  this.weatherSettingsError = function (){
+    // lazzyLoad.remove();
+    // lazzyRound.remove();
+    // let lazzyError = document.createElement('span');
+    // lazzyError.classList.add('lazzy-error');
+    // wrapper.append(lazzyError);
+    lazzyRound.innerHTML = 'error loading data to display weather conditions';
+    lazzyRound.classList.add('lazzy-error__text');
+    let lazzyLoadBTN = document.createElement('div');
+    lazzyLoadBTN.classList.add('lazzy-load__btn');
+    lazzyRound.after(lazzyLoadBTN);
+  };
 }

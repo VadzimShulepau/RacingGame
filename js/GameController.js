@@ -59,6 +59,7 @@ export function GameController() {
 
   this.initRenderPage = function () {
     this.resizeGame();
+    // let lazzyLoadBTN = document.querySelector('.lazzy-load__btn');
 
     track = wrapperC.querySelector(".track"); // блок с дорогой
     gameWrapper = wrapperC.querySelector(".game-wrapper"); // контейнер с игрой
@@ -126,6 +127,9 @@ export function GameController() {
     }
     if (e.target.closest(".delete-wrapper")) {
       modelC.deleteUser();
+    }
+    if(e.target.closest('.lazzy-load__btn')){
+      modelC.lazzyStatus();
     }
 
     modelC.soundClick();
