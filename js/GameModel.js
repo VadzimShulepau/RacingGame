@@ -46,6 +46,8 @@ export function GameModel() {
   const APIkey = "c6be1bfbfa6894d1345f3402fccb7d26";
   let exclude = "hourly,minutely";
   let weather = null;
+  let lazzyStatus = true;
+  let netStatus = true;
 
   this.init = function (view, data) {
     //инициализация верстки
@@ -246,6 +248,7 @@ export function GameModel() {
       (error) => {
         console.log("Error: " + error.code);
         this.createUserListError();
+        // lazzyStatus = false;
       }
     );
   };
@@ -403,11 +406,13 @@ export function GameModel() {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     let geoloc = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIkey}`;
+    
     fetch(geoloc)
       .then((response) => response.json())
       .then((data) => this.weatherSettings(data))
       .catch((error) => {console.log(error);
-        viewM.weatherSettingsError();
+        lazzyStatus = false;
+        viewM.weatherSettingsError(lazzyStatus, netStatus);
       });
   };
 
@@ -420,7 +425,7 @@ export function GameModel() {
   this.weatherSettings = function (data) {
     //рендер погодных условий 
     //перключение времени суток
-    this.lazzyStatus(); //отключение загрузки
+    this.lazzyStatusFlag(); //отключение загрузки
     let dateSunrise = new Date(data.sys.sunrise * 1000);
     let dateSunset = new Date(data.sys.sunset * 1000);
     if (dateSunrise < curentTime && curentTime < dateSunset) {
@@ -436,7 +441,13 @@ export function GameModel() {
     }
   };
 
-  this.lazzyStatus = function () {
+  this.lazzyStatusFlag = function () { //отключение загрузки
     viewM.lazzyStatus(false);
+  };
+
+  this.lazzyLoadError = function (net){ //вывод ошибки подключения
+    netStatus = net;
+    // lazzyStatus = false;
+    viewM.weatherSettingsError(lazzyStatus, netStatus);
   };
 }

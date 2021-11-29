@@ -41,6 +41,7 @@ export function GameView() {
   let timerCountSound = new Audio("./sound/beeps.mp3");
   let lazzyLoad = null;
   let lazzyRound = null;
+  let lazzyError = null;
   let position = 0;
   let car = {
     cor: 0,
@@ -624,19 +625,25 @@ export function GameView() {
     if(!status){
       lazzyLoad.remove();
       lazzyRound.remove();
+      if(lazzyError){
+      lazzyError.remove();
+      }
     }
   };
 
-  this.weatherSettingsError = function (){
-    // lazzyLoad.remove();
-    // lazzyRound.remove();
-    // let lazzyError = document.createElement('span');
-    // lazzyError.classList.add('lazzy-error');
-    // wrapper.append(lazzyError);
-    lazzyRound.innerHTML = 'error loading data to display weather conditions';
-    lazzyRound.classList.add('lazzy-error__text');
-    let lazzyLoadBTN = document.createElement('div');
-    lazzyLoadBTN.classList.add('lazzy-load__btn');
-    lazzyRound.after(lazzyLoadBTN);
+  this.weatherSettingsError = function (status, net){ //вывод ошибки подключения
+    lazzyRound.remove();
+    lazzyError = document.createElement('div');
+    lazzyError.classList.add('lazzy-error__text');
+    wrapper.append(lazzyError);
+
+    if(!status){
+      lazzyError.innerHTML = `<span>loading error d
+      these...</span> 
+      <div class = "lazzy-load__btn">OK</div>`;
+    }
+    if(!net){
+      lazzyError.innerHTML = `<span>no internet connection</span> <div class = "lazzy-load__btn">OK</div>`;
+    } 
   };
 }

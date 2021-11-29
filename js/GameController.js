@@ -7,7 +7,7 @@ export function GameController() {
   let touchDevice = null;
   let startBTN = null;
   let geoNavigator = null;
-
+  let navigatorNet = false;
   let key = {
     arrowUp: false,
     arrowDown: false,
@@ -18,7 +18,7 @@ export function GameController() {
   this.init = function (body, model) {
     wrapperC = body;
     modelC = model;
-
+    
     window.addEventListener("resize", this.resizeGame); // размер рабочего окна
     this.resizeGame();
 
@@ -38,9 +38,8 @@ export function GameController() {
     }
     startBTN.addEventListener("click", this.loadStartMessage);
     geoNavigator = navigator.geolocation;
-    // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-    //   // document.body.requestFullScreen();
-    // }
+
+    navigatorNet = navigator.onLine;
   };
 
   this.loadStartMessage = (e) => {
@@ -59,8 +58,7 @@ export function GameController() {
 
   this.initRenderPage = function () {
     this.resizeGame();
-    // let lazzyLoadBTN = document.querySelector('.lazzy-load__btn');
-
+    
     track = wrapperC.querySelector(".track"); // блок с дорогой
     gameWrapper = wrapperC.querySelector(".game-wrapper"); // контейнер с игрой
     nameInput = wrapperC.querySelector(".name-input"); // ввод имени
@@ -79,11 +77,15 @@ export function GameController() {
     }
     modelC.parametres(track, gameWrapper);
     modelC.soundCheckSettingsStart();
+
+    console.log(navigator.onLine)
+    if(!navigatorNet){
+      //вывод ошибки
+    modelC.lazzyLoadError(navigatorNet);
+    }
   };
 
   this.resizeGame = function () {
-    // let clientWidth = document.body.clientWidth;
-    // let clientHeight = document.body.clientHeight;
     let clientWidth = window.innerWidth;
     let clientHeight = window.innerHeight;
     modelC.resizeGame(clientWidth, clientHeight);
@@ -129,7 +131,7 @@ export function GameController() {
       modelC.deleteUser();
     }
     if(e.target.closest('.lazzy-load__btn')){
-      modelC.lazzyStatus();
+      modelC.lazzyStatusFlag();
     }
 
     modelC.soundClick();
