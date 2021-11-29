@@ -640,7 +640,7 @@ padding: var(--padd);
 font-size: var(--fontSize);
 color: var(--error-text);
 width: 50%;
-height: 200px;
+height: 150px;
 z-index: 45;
 }
 

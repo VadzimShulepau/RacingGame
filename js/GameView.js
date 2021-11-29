@@ -588,6 +588,7 @@ export function GameView() {
   };
 
   this.renderPrecipitation = function (rand, weather, i) { //погодные условия
+    // console.log(weather)
     if (weather === "rain" || weather === "snow" || weather === "clouds") {
       let drop = document.createElement("div");
       drop.classList.add("precipitation");
@@ -631,17 +632,14 @@ export function GameView() {
     }
   };
 
-  this.weatherSettingsError = function (status, net){ //вывод ошибки подключения
+  this.weatherSettingsError = function (net){ //вывод ошибки подключения
     lazzyRound.remove();
     lazzyError = document.createElement('div');
     lazzyError.classList.add('lazzy-error__text');
     wrapper.append(lazzyError);
 
-    if(!status){
-      lazzyError.innerHTML = `<span>data loading error...</span> <div class = "lazzy-load__btn">OK</div>`;
-    }
     if(!net){
-      lazzyError.innerHTML = `<span>no internet connection</span> <div class = "lazzy-load__btn">OK</div>`;
+      lazzyError.innerHTML = `<span>no internet connection or databases unavailable</span> <div class = "lazzy-load__btn">OK</div>`;
     } 
   };
 }

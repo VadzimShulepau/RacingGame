@@ -46,7 +46,6 @@ export function GameModel() {
   const APIkey = "c6be1bfbfa6894d1345f3402fccb7d26";
   let exclude = "hourly,minutely";
   let weather = null;
-  let lazzyStatus = true;
   let netStatus = true;
 
   this.init = function (view, data) {
@@ -247,8 +246,8 @@ export function GameModel() {
       },
       (error) => {
         console.log("Error: " + error.code);
-        lazzyStatus = false;
-        viewM.weatherSettingsError(lazzyStatus, netStatus);
+        netStatus = false;
+        this.lazzyLoadError(netStatus);
         this.createUserListError();
       }
     );
@@ -412,8 +411,8 @@ export function GameModel() {
       .then((response) => response.json())
       .then((data) => this.weatherSettings(data))
       .catch((error) => {console.log(error);
-        lazzyStatus = false;
-        viewM.weatherSettingsError(lazzyStatus, netStatus);
+        netStatus = false;
+        this.lazzyLoadError(netStatus);
       });
   };
 
@@ -448,7 +447,6 @@ export function GameModel() {
 
   this.lazzyLoadError = function (net){ //вывод ошибки подключения
     netStatus = net;
-    // lazzyStatus = false;
-    viewM.weatherSettingsError(lazzyStatus, netStatus);
+    viewM.weatherSettingsError(netStatus);
   };
 }

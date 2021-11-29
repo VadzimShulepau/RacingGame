@@ -78,11 +78,11 @@ export function GameController() {
     modelC.parametres(track, gameWrapper);
     modelC.soundCheckSettingsStart();
 
-    console.log(navigator.onLine)
-    if(!navigatorNet){
-      //вывод ошибки
-    modelC.lazzyLoadError(navigatorNet);
-    }
+    console.log(navigatorNet)
+    // if(!navigatorNet){
+    //   //вывод ошибки
+    // modelC.lazzyLoadError(false);
+    // }
   };
 
   this.resizeGame = function () {
