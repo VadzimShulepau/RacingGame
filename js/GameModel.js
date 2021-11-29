@@ -247,8 +247,9 @@ export function GameModel() {
       },
       (error) => {
         console.log("Error: " + error.code);
+        lazzyStatus = false;
+        viewM.weatherSettingsError(lazzyStatus, netStatus);
         this.createUserListError();
-        // lazzyStatus = false;
       }
     );
   };

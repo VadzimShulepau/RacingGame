@@ -633,10 +633,14 @@ position: absolute;
 display: inline-flex;
 justify-content: center;
 text-align: center;
+background: var(--background);
+border: 2px solid var(--text-color);
+border-radius: var(--radius);
+padding: var(--padd);
 font-size: var(--fontSize);
 color: var(--error-text);
 width: 50%;
-height: 150px;
+height: 200px;
 z-index: 45;
 }
 
