@@ -625,9 +625,9 @@ export function GameView() {
   this.lazzyStatus = function (){ // отключение анимации загрузки
       lazzyLoad.remove();
       lazzyRound.remove();
-      // if(lazzyError){
+      if(lazzyError){
       lazzyError.remove();
-      // }
+      }
   };
 
   this.weatherSettingsError = function (net){ //вывод ошибки подключения

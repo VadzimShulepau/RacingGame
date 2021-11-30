@@ -444,8 +444,7 @@ export function GameModel() {
   };
 
   this.lazzyLoadError = function (net){ //вывод ошибки подключения
-    console.log(net)
     netStatus = net;
-    viewM.weatherSettingsError(netStatus);
+    if(!netStatus) viewM.weatherSettingsError(netStatus);
   };
 }
