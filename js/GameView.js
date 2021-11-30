@@ -588,7 +588,7 @@ export function GameView() {
   };
 
   this.renderPrecipitation = function (rand, weather, i) { //погодные условия
-    // console.log(weather)
+    console.log(weather)
     if (weather === "rain" || weather === "snow" || weather === "clouds") {
       let drop = document.createElement("div");
       drop.classList.add("precipitation");
@@ -622,14 +622,12 @@ export function GameView() {
     // }
   };
 
-  this.lazzyStatus = function (status){ // отключение анимации загрузки
-    if(!status){
+  this.lazzyStatus = function (){ // отключение анимации загрузки
       lazzyLoad.remove();
       lazzyRound.remove();
-      if(lazzyError){
+      // if(lazzyError){
       lazzyError.remove();
-      }
-    }
+      // }
   };
 
   this.weatherSettingsError = function (net){ //вывод ошибки подключения

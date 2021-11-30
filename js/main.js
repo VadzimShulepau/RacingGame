@@ -17,8 +17,15 @@ const ConnectGame = (function () {
     version: 'version: 0.1',
     initGame: function (body) {
       this.main();
-      firebase.initializeApp(firebaseConfig);
-      const database = firebase.database();
+     let database;
+      if(typeof firebase === 'object'){
+        firebase.initializeApp(firebaseConfig);
+        database = firebase.database();
+      }else{
+        database = null;
+      }
+      // firebase.initializeApp(firebaseConfig);
+      // const database = firebase.database();
       const gameView = new GameView();
       const gameModel = new GameModel();
       const gameController = new GameController();

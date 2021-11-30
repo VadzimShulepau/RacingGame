@@ -51,13 +51,17 @@ export function GameModel() {
   this.init = function (view, data) {
     //инициализация верстки
     viewM = view;
-    database = data;
+    if(typeof data === 'object'){
+      database = data;
+    }else{
+      database = null;
+    }
+    
   };
 
   this.parametres = function (tr, gw) {
     //данные для перерасчета
     track = tr;
-    // console.log(track)
     car.x = track.offsetWidth / 2 - car.w / 2;
     car.y = track.offsetHeight - car.h;
     height = gw.offsetHeight;
@@ -85,14 +89,10 @@ export function GameModel() {
 
     status = start;
     if (status) {
-      // viewM.startGame();
-
       intervalTimer = setInterval(this.timerCount, 1000);
-
       if (user.sound) {
         viewM.startCarSound(true);
       }
-
       viewM.appentIMG(this.calcNumber());
       setTimeout(() => {
         viewM.startCarSound(false);
@@ -239,26 +239,24 @@ export function GameModel() {
 
   this.readJSON = () => {
     //вычитка данных с сервера
-    database.ref("users/").on(
-      "value",
-      (snapshot) => {
-        sortList = Object.values(snapshot.val());
-      },
-      (error) => {
-        console.log("Error: " + error.code);
-        netStatus = false;
-        this.lazzyLoadError(netStatus);
-        this.createUserListError();
+    if(typeof database === 'object' && database != null){
+      database.ref("users/").on(
+        "value",
+        (snapshot) => {
+          sortList = Object.values(snapshot.val());
+        },
+        (error) => {
+          console.log("Error: " + error.code);
+          this.createUserListError();
+        }
+        );
       }
-    );
   };
 
   this.createUserList = function () {
     // обработка данных содание списка для отображения
-
     viewM.clearUserList();
     this.readJSON();
-    // console.log(sortList, dataBaseUsers)
     if (sortList) {
       sortList.sort(function (a, b) {
         //сортировка списка по убыванию
@@ -359,11 +357,11 @@ export function GameModel() {
     viewM.renderStartPage();
   };
 
-  this.loadStartMessage = function () {
+  this.loadStartMessage = function (net) {
     //рендер игры
-    //   console.log('click')
     viewM.clearRender();
     viewM.render();
+    this.lazzyLoadError (net);
     this.readJSON();
   };
 
@@ -442,10 +440,11 @@ export function GameModel() {
   };
 
   this.lazzyStatusFlag = function () { //отключение загрузки
-    viewM.lazzyStatus(false);
+    viewM.lazzyStatus();
   };
 
   this.lazzyLoadError = function (net){ //вывод ошибки подключения
+    console.log(net)
     netStatus = net;
     viewM.weatherSettingsError(netStatus);
   };
