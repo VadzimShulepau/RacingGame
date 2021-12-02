@@ -401,8 +401,17 @@ export function GameModel() {
   };
 
   this.generatePosition = (position) => { //подключение API для получения погоды
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
+    console.log(position)
+    let lat, lon;
+
+    if(position.length > 0){
+      lat = position.coords.latitude;
+      lon = position.coords.longitude;
+    }else{
+      lat = 53.9007;
+      lon = 27.5709;
+    }
+    
     let geoloc = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIkey}`;
     
     fetch(geoloc)

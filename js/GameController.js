@@ -36,9 +36,11 @@ export function GameController() {
     if (touchDevice) {
       modelC.gameViewTouch();
     }
-    startBTN.addEventListener("click", this.loadStartMessage);
+
     geoNavigator = navigator.geolocation;
     navigatorNet = navigator.onLine;
+    // console.log(navigator.geolocation)
+    startBTN.addEventListener("click", this.loadStartMessage);
   };
 
   this.loadStartMessage = (e) => {
@@ -49,14 +51,14 @@ export function GameController() {
       // проверяем есть ли сохраненные настройки в локальном хранилище
       modelC.restoreSettings();
     }
-    if (geoNavigator) {
+    // if (geoNavigator) {
       // определяем геолокацию игрока
       geoNavigator.getCurrentPosition(modelC.generatePosition);
-    }else{
-      
-      //вывод ошибки
-      modelC.lazzyLoadError(geoNavigator);
-    }
+    // }else{
+      // geoNavigator.getCurrentPosition(null);
+    // }
+    // //вывод ошибки
+    // modelC.lazzyLoadError(geoNavigator);
   };
 
   this.initRenderPage = function () {
