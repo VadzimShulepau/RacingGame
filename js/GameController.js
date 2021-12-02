@@ -52,9 +52,11 @@ export function GameController() {
     if (geoNavigator) {
       // определяем геолокацию игрока
       geoNavigator.getCurrentPosition(modelC.generatePosition);
+    }else{
+      
+      //вывод ошибки
+      modelC.lazzyLoadError(geoNavigator);
     }
-     //вывод ошибки
-    //  modelC.lazzyLoadError(navigatorNet);
   };
 
   this.initRenderPage = function () {
