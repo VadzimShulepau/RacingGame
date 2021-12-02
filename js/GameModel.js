@@ -465,7 +465,7 @@ export function GameModel() {
     if(!netStatus) viewM.weatherSettingsError();
   };
 
-  this.fullScreen = function (flag){
-    viewM.fullScreen(flag);
+  this.fullScreen = function (screen){
+    viewM.fullScreen(screen);
   }
 }

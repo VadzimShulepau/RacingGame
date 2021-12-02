@@ -200,13 +200,7 @@ export function GameController() {
   this.fullScreenWindow = function () {
     // включение полноэкранного режима для мобильных устройств
     // console.log('fullscreen')
-    if (wrapperC.requestFullScreen || wrapperC.mozRequestFullScreen || wrapperC.webkitRequestFullScreen) {
-      modelC.fullScreen(true);
-    //   wrapper.requestFullScreen(true);
-    // } else if (wrapperC.mozRequestFullScreen) {
-    //   wrapper.mozRequestFullScreen(true);
-    // } else if (wrapperC.webkitRequestFullScreen) {
-    //   wrapper.webkitRequestFullScreen(true);
-    }
+    let screen = wrapperC.requestFullScreen || wrapperC.mozRequestFullScreen || wrapperC.webkitRequestFullScreen;
+    modelC.fullScreen(screen);
   };
 }

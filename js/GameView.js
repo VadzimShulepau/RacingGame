@@ -641,11 +641,18 @@ export function GameView() {
     } 
   };
 
-  this.fullScreen = function (flag){
-    if(flag){
-      wrapper.requestFullScreen();
-      wrapper.mozRequestFullScreen();
-      wrapper.webkitRequestFullScreen();
+  this.fullScreen = function (screen){
+    // console.log(screen.name)
+    switch(screen.name){
+      case 'requestFullScreen':
+        wrapper.requestFullScreen();
+        break;
+      case 'mozRequestFullScreen':
+        wrapper.mozRequestFullScreen();
+        break;
+      case 'webkitRequestFullScreen':
+        wrapper.webkitRequestFullScreen();
+        break;
     }
   };
 }
