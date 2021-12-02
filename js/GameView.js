@@ -640,4 +640,12 @@ export function GameView() {
       lazzyError.innerHTML = `<span>no internet connection or databases unavailable</span> <div class = "lazzy-load__btn">OK</div>`;
     } 
   };
+
+  this.fullScreen = function (flag){
+    if(flag){
+      wrapper.requestFullScreen();
+      wrapper.mozRequestFullScreen();
+      wrapper.webkitRequestFullScreen();
+    }
+  };
 }

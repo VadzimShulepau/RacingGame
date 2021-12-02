@@ -447,4 +447,8 @@ export function GameModel() {
     netStatus = net;
     if(!netStatus) viewM.weatherSettingsError();
   };
+
+  this.fullScreen = function (flag){
+    viewM.fullScreen(flag);
+  }
 }
