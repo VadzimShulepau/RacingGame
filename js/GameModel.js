@@ -399,12 +399,20 @@ export function GameModel() {
       timer = 4;
     }
   };
+  
+  this.getGeoPosition = (geoNavigator) => {
+    if(Object.keys(geoNavigator).length > 0){
+      geoNavigator.getCurrentPosition(this.generatePosition);
+    }else{
+      this.generatePosition(null);
+    }
+  };
 
   this.generatePosition = (position) => { //подключение API для получения погоды
-    console.log(position)
+    // console.log(position)
     let lat, lon;
 
-    if(position.length > 0){
+    if(position && position !== null){
       lat = position.coords.latitude;
       lon = position.coords.longitude;
     }else{

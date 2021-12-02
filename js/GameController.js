@@ -51,14 +51,8 @@ export function GameController() {
       // проверяем есть ли сохраненные настройки в локальном хранилище
       modelC.restoreSettings();
     }
-    // if (geoNavigator) {
       // определяем геолокацию игрока
-      geoNavigator.getCurrentPosition(modelC.generatePosition);
-    // }else{
-      // geoNavigator.getCurrentPosition(null);
-    // }
-    // //вывод ошибки
-    // modelC.lazzyLoadError(geoNavigator);
+      modelC.getGeoPosition(geoNavigator);
   };
 
   this.initRenderPage = function () {
