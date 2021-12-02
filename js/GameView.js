@@ -298,7 +298,7 @@ export function GameView() {
     lazzyRound = document.createElement('div');
     let lazzyLoadIMG = new Image();
     lazzyLoadIMG.src = './png/tyre.png';
-    lazzyRound.append(lazzyLoadIMG); 
+    lazzyRound.append(lazzyLoadIMG);
     lazzyRound.classList.add('lazzy-load__round');
     wrapper.append(lazzyRound);
   };
@@ -622,28 +622,28 @@ export function GameView() {
     // }
   };
 
-  this.lazzyStatus = function (){ // отключение анимации загрузки
-      lazzyLoad.remove();
-      lazzyRound.remove();
-      if(lazzyError){
+  this.lazzyStatus = function () { // отключение анимации загрузки
+    lazzyLoad.remove();
+    lazzyRound.remove();
+    if (lazzyError) {
       lazzyError.remove();
-      }
+    }
   };
 
-  this.weatherSettingsError = function (net){ //вывод ошибки подключения
+  this.weatherSettingsError = function (net) { //вывод ошибки подключения
     lazzyRound.remove();
     lazzyError = document.createElement('div');
     lazzyError.classList.add('lazzy-error__text');
     wrapper.append(lazzyError);
 
-    if(!net){
+    if (!net) {
       lazzyError.innerHTML = `<span>no internet connection or databases unavailable</span> <div class = "lazzy-load__btn">OK</div>`;
-    } 
+    }
   };
 
-  this.fullScreen = function (screen){
+  this.fullScreen = function (screen) {
     // console.log(screen.name)
-    switch(screen.name){
+    switch (screen.name) {
       case 'requestFullScreen':
         wrapper.requestFullScreen();
         break;

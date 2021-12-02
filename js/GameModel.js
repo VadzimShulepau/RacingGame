@@ -51,12 +51,12 @@ export function GameModel() {
   this.init = function (view, data) {
     //инициализация верстки
     viewM = view;
-    if(typeof data === 'object'){
+    if (typeof data === 'object') {
       database = data;
-    }else{
+    } else {
       database = null;
     }
-    
+
   };
 
   this.parametres = function (tr, gw) {
@@ -239,7 +239,7 @@ export function GameModel() {
 
   this.readJSON = () => {
     //вычитка данных с сервера
-    if(typeof database === 'object' && database != null){
+    if (typeof database === 'object' && database != null) {
       database.ref("users/").on(
         "value",
         (snapshot) => {
@@ -249,8 +249,8 @@ export function GameModel() {
           console.log("Error: " + error.code);
           this.createUserListError();
         }
-        );
-      }
+      );
+    }
   };
 
   this.createUserList = function () {
@@ -275,7 +275,7 @@ export function GameModel() {
     viewM.createUserList(null, null);
   };
 
-  this.deleteUser = function () { 
+  this.deleteUser = function () {
     window.localStorage.removeItem("user");
     database
       .ref("users/" + user.name)
@@ -361,7 +361,7 @@ export function GameModel() {
     //рендер игры
     viewM.clearRender();
     viewM.render();
-    this.lazzyLoadError (net);
+    this.lazzyLoadError(net);
     this.readJSON();
   };
 
@@ -399,11 +399,11 @@ export function GameModel() {
       timer = 4;
     }
   };
-  
+
   this.getGeoPosition = (geoNavigator) => {
-    if(Object.keys(geoNavigator).length > 0){
+    if (Object.keys(geoNavigator).length > 0) {
       geoNavigator.getCurrentPosition(this.generatePosition);
-    }else{
+    } else {
       this.generatePosition(null);
     }
   };
@@ -412,20 +412,21 @@ export function GameModel() {
     // console.log(position)
     let lat, lon;
 
-    if(position && position !== null){
+    if (position && position !== null) {
       lat = position.coords.latitude;
       lon = position.coords.longitude;
-    }else{
+    } else {
       lat = 53.9007;
       lon = 27.5709;
     }
-    
+
     let geoloc = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIkey}`;
-    
+
     fetch(geoloc)
       .then((response) => response.json())
       .then((data) => this.weatherSettings(data))
-      .catch((error) => {console.log(error);
+      .catch((error) => {
+        console.log(error);
         netStatus = false;
         this.lazzyLoadError(netStatus);
       });
@@ -460,12 +461,12 @@ export function GameModel() {
     viewM.lazzyStatus();
   };
 
-  this.lazzyLoadError = function (net){ //вывод ошибки подключения
+  this.lazzyLoadError = function (net) { //вывод ошибки подключения
     netStatus = net;
-    if(!netStatus) viewM.weatherSettingsError();
+    if (!netStatus) viewM.weatherSettingsError();
   };
 
-  this.fullScreen = function (screen){
+  this.fullScreen = function (screen) {
     viewM.fullScreen(screen);
   }
 }

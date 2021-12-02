@@ -18,7 +18,7 @@ export function GameController() {
   this.init = function (body, model) {
     wrapperC = body;
     modelC = model;
-    
+
     window.addEventListener("resize", this.resizeGame); // размер рабочего окна
     this.resizeGame();
 
@@ -51,13 +51,13 @@ export function GameController() {
       // проверяем есть ли сохраненные настройки в локальном хранилище
       modelC.restoreSettings();
     }
-      // определяем геолокацию игрока
-      modelC.getGeoPosition(geoNavigator);
+    // определяем геолокацию игрока
+    modelC.getGeoPosition(geoNavigator);
   };
 
   this.initRenderPage = function () {
     this.resizeGame();
-    
+
     track = wrapperC.querySelector(".track"); // блок с дорогой
     gameWrapper = wrapperC.querySelector(".game-wrapper"); // контейнер с игрой
     nameInput = wrapperC.querySelector(".name-input"); // ввод имени
@@ -122,7 +122,7 @@ export function GameController() {
     if (e.target.closest(".delete-wrapper")) {
       modelC.deleteUser();
     }
-    if(e.target.closest('.lazzy-load__btn')){
+    if (e.target.closest('.lazzy-load__btn')) {
       modelC.lazzyStatusFlag();
     }
 
