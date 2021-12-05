@@ -38,7 +38,7 @@ export function GameView() {
   let flashlight = null;
   let flashlightB = null;
   let flashlightIMG = null;
-  let timerCountSound = new Audio("./sound/beeps.mp3");
+  let timerCountSound = null;
   let lazzyLoad = null;
   let lazzyRound = null;
   let lazzyError = null;
@@ -283,10 +283,12 @@ export function GameView() {
     crashSound = new Audio("./sound/crash.mp3");
     raceSound = new Audio("./sound/race.mp3");
     startSound = new Audio("./sound/start.mp3");
+    timerCountSound = new Audio("./sound/beeps.mp3");
 
     gameWrapper.append(crashSound);
     gameWrapper.append(raceSound);
     gameWrapper.append(startSound);
+    gameWrapper.append(timerCountSound);
 
     timerCount = document.createElement("span");
     timerCount.classList.add("timer");
