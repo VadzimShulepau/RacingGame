@@ -191,9 +191,10 @@ export function GameModel() {
 
   this.colide = function () {
     //коализии
-    if (car.y < mess.y && car.y + car.h > mess.y) {
+    if (car.y > mess.y - mess.h && car.y < mess.y) {
       this.pointCount();
-      if (car.x < mess.x + mess.w && car.x + car.w > mess.x) {
+      if (car.x < mess.x + mess.w && car.x > mess.x - mess.w) {
+        // console.log(car.x, car.y, mess.x, mess.y)
         this.gameStatus(false);
         this.writeJSON();
         // this.readJSON();
@@ -228,7 +229,7 @@ export function GameModel() {
       .ref("users/" + `${user.name.replace(" ", "_").toLowerCase()}`)
       .set(user)
       .then(function () {
-        console.log("User added");
+        console.log("user added");
       })
       .catch(function (error) {
         console.error("User adding error: ", error);
@@ -281,7 +282,7 @@ export function GameModel() {
       .ref("users/" + user.name)
       .remove()
       .then(() => {
-        console.log("Данные удалены");
+        console.log("data deleted");
         this.createUserList();
         // this.writeJSON();
         // this.readJSON();
