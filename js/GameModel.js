@@ -289,7 +289,7 @@ export function GameModel() {
         viewM.deleteUser();
       })
       .catch(function (error) {
-        console.error("Data deletion error: ", error);
+        console.error("data deletion error: ", error);
       });
   };
 
