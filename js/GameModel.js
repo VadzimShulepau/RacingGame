@@ -240,7 +240,7 @@ export function GameModel() {
 
   this.readJSON = () => {
     //вычитка данных с сервера
-    if (typeof database === 'object' && database != null) {
+    if (typeof database === 'object' && database != 'null') {
       database.ref("users/").on(
         "value",
         (snapshot) => {
