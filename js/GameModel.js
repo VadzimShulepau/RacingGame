@@ -441,7 +441,7 @@ export function GameModel() {
 
   this.weatherSettings = function (data) {
     //рендер погодных условий 
-    //перключение времени суток
+    //перeключение времени суток
     this.lazzyStatusFlag(); //отключение загрузки
     let dateSunrise = new Date(data.sys.sunrise * 1000);
     let dateSunset = new Date(data.sys.sunset * 1000);
